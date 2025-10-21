@@ -47,8 +47,11 @@ def upload_audio(request):
             audio_post.save()
             messages.success(request, 'Your mix was uploaded successfully!')
             return redirect('home')
+        else:
+            # Form was submitted but invalid — show an error and re-render with entered data
+            messages.error(request, 'There was a problem uploading your mix. Please check the form and try again.')
     else:
-        messages.error(request, 'There was a problem uploading your mix.')
+        # GET request — display a blank form without error messages
         form = AudioPostForm()
     return render(request, 'mixes/upload_audio.html', {'form': form})
 
