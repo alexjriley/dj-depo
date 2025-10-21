@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('hello_world.urls')),
+    path('', include('mixes.urls')),
         path('accounts/', include('django.contrib.auth.urls')),  # login/logout/password views
 ]
 

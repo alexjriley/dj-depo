@@ -5,6 +5,12 @@ from .models import AudioPost
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login
 
+# Create your views here.
+
+def home_page_view(request):  
+    posts = AudioPost.objects.order_by('-created_at')
+    return render(request, 'home.html', {'posts': posts})
+
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -37,8 +43,6 @@ def upload_audio(request):
         form = AudioPostForm()
     return render(request, 'upload_audio.html', {'form': form})
 
-# Create your views here.
 
-def home_page_view(request):  
-    posts = AudioPost.objects.order_by('-created_at')
-    return render(request, 'home.html', {'posts': posts})
+
+
