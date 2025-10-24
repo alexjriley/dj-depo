@@ -1,5 +1,71 @@
 /* Project custom styles */
 
+/* Typography: use Google Fonts loaded in base.html */
+body {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #111827;
+}
+
+/* Headings use an edgy slab-serif (Roboto Slab) first, then fall back to Poppins/Inter */
+/* Headings use Zilla Slab (slab serif) first, then fall back to Poppins/Inter */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Zilla Slab', 'Poppins', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, serif;
+  letter-spacing: -0.01em;
+}
+
+/* Slightly bolder brand */
+.navbar-brand {
+  font-weight: 600;
+}
+
+/* Slightly upscale navbar: more vertical space for branding and nav links */
+.navbar {
+  padding-top: 0.85rem; /* increased from bootstrap default */
+  padding-bottom: 0.85rem;
+  min-height: 64px;
+}
+
+.navbar-brand {
+  font-size: 1.125rem; /* slightly larger brand */
+  line-height: 1;
+}
+
+.navbar-nav .nav-link {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Responsive type scale using clamp() for better legibility across devices */
+:root {
+  /* Base font size: fluid between 14px and 18px */
+  --fs-base: clamp(0.875rem, 0.85rem + 0.3vw, 1.125rem); /* ~14px - 18px */
+  --fs-scale-1: clamp(1.125rem, 1.05rem + 1.0vw, 1.5rem); /* h6 / small headings */
+  --fs-scale-2: clamp(1.25rem, 1.15rem + 1.25vw, 1.75rem); /* h4 */
+  --fs-scale-3: clamp(1.5rem, 1.35rem + 1.75vw, 2.25rem); /* h3 */
+  --fs-scale-4: clamp(2rem, 1.9rem + 2.5vw, 3rem); /* h2 */
+  /* Make h1 more dramatic: larger max size and stronger scaling */
+  --fs-scale-5: clamp(2.25rem, 2.0rem + 5.0vw, 4.5rem); /* h1 */
+}
+
+html { font-size: var(--fs-base); }
+
+h1 {
+  font-size: var(--fs-scale-5);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.6rem;
+  /* subtle lift for headings */
+  text-rendering: optimizeLegibility;
+  /* serif-specific styling for a slightly edgier look */
+  text-transform: none;
+}
+h2 { font-size: var(--fs-scale-4); }
+h3 { font-size: var(--fs-scale-3); }
+h4 { font-size: var(--fs-scale-2); }
+h5, h6 { font-size: var(--fs-scale-1); }
+
+
 /* Hero carousel image - take up 40% of the viewport height */
 .hero-img {
   height: 40vh;
@@ -24,8 +90,97 @@ section.container h2 {
   height: 100%;
 }
 
-@media (max-width: 767px) {
+/* Ensure images and media can't force horizontal overflow */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Final safety: clip any accidental horizontal overflow on very small viewports */
+html, body {
+  overflow-x: hidden;
+}
+
+
+/* ----------------------------
+   Standard breakpoint media queries
+   XS: <576px, SM: 576-767.98px, MD: 768-991.98px,
+   LG: 992-1199.98px, XL: >=1200px
+   ---------------------------- */
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  /* XS styles */
   .hero-img {
-    height: 35vh;
+    height: 32vh;
+  }
+  .navbar {
+    min-height: 3vh;
   }
 }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* SM styles */
+  .hero-img {
+    height: 34vh;
+  }
+  .navbar {
+    min-height: 5vh;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* MD styles */
+  .hero-img {
+    height: 36vh;
+  }
+  .navbar {
+    min-height: 7vh;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  /* LG: enforce a 3-column grid for Discover so layout doesn't collapse to 2 columns */
+  #discover .row {
+    display: grid;
+    /* Use minmax(0, 1fr) so grid tracks can shrink below their content without causing overflow */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  /* allow grid children to shrink and avoid overflowing due to long words or media */
+  #discover .mix-col {
+    width: auto;
+    min-width: 0;
+  }
+
+  /* Make card fill column height for consistent cards */
+  #discover .mix-col .card {
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .hero-img {
+    height: 38vh;
+  }
+
+  .navbar {
+    min-height: 9vh;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  /* XL styles (optional tweaks for very large screens) */
+  .hero-img {
+    height: 42vh;
+  }
+}
+
+

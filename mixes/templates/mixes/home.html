@@ -40,12 +40,12 @@
 {% endblock %}
 
 {% block content %}
-  <section class="container mt-4">
+  <section id="discover" class="container mt-4">
     <h2 class="mb-4">Discover</h2>
     {% if posts %}
     <div class="row g-4">
       {% for post in posts %}
-      <div class="col-12 col-md-6 col-lg-4">
+      <div class="col-12 mix-col">
         <div class="card h-100">
           {% if post.audio_file.url %}
           <div class="ratio ratio-16x9">
