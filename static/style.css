@@ -1,0 +1,31 @@
+/* Project custom styles */
+
+/* Hero carousel image - take up 40% of the viewport height */
+.hero-img {
+  height: 40vh;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Make sure carousel controls are vertically centered */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 2rem 2rem;
+}
+
+/* Slight spacing for the Discover section */
+section.container h2 {
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Card audio sizing tweaks */
+.card .ratio audio {
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .hero-img {
+    height: 35vh;
+  }
+}
