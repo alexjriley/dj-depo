@@ -22,11 +22,41 @@ import cloudinary.api
 if os.path.isfile('env.py'):
     import env
 
-cloudinary.config(
-    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    api_key=os.environ.get('CLOUDINARY_API_KEY'),
-    api_secret=os.environ.get('CLOUDINARY_API_SECRET')
-)
+if os.environ.get('CLOUDINARY_URL'):
+    # Parse CLOUDINARY_URL of the form cloudinary://<api_key>:<api_secret>@<cloud_name>
+    _c_url = os.environ.get('CLOUDINARY_URL')
+    try:
+        _parts = _c_url.split('://', 1)[1]
+        creds, cloud = _parts.split('@', 1)
+        api_key, api_secret = creds.split(':', 1)
+        cloud_name = cloud
+        cloudinary.config(cloud_name=cloud_name, api_key=api_key, api_secret=api_secret)
+    except Exception:
+        # Fallback to default behavior; cloudinary will raise a clearer error later
+        cloudinary.config()
+else:
+    cloudinary.config(
+        cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+        api_key=os.environ.get('CLOUDINARY_API_KEY'),
+        api_secret=os.environ.get('CLOUDINARY_API_SECRET')
+    )
+
+# Runtime check: ensure Cloudinary credentials are available in non-test runs.
+# This raises a clear error early if credentials are missing on deploy (so failures are obvious).
+if 'test' not in sys.argv:
+    if not (
+        os.environ.get('CLOUDINARY_URL')
+        or (
+            os.environ.get('CLOUDINARY_API_KEY')
+            and os.environ.get('CLOUDINARY_API_SECRET')
+            and os.environ.get('CLOUDINARY_CLOUD_NAME')
+        )
+    ):
+        raise RuntimeError(
+            "Cloudinary credentials are missing. Set either CLOUDINARY_URL or the three vars: "
+            "CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET. "
+            "On Heroku run: heroku config:set CLOUDINARY_URL='cloudinary://<key>:<secret>@<name>' -a <appname>"
+        )
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -174,3 +204,6 @@ if 'test' in sys.argv:
         'DEPENDENCIES': [],
         'CREATE_DB': True,
     }
+    # During tests, use local file storage to avoid uploading test files to Cloudinary
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    MEDIA_ROOT = BASE_DIR / 'test_media'
