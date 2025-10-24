@@ -1,24 +1,79 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block hero %}
+  <!-- Full width hero carousel -->
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/pexels-gigxels-7709006.jpg' %}" class="d-block w-100 hero-img" alt="hero-1">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/pexels-wendelinjacober-1447957.jpg' %}" class="d-block w-100 hero-img" alt="hero-2">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/pexels-inga-sv-3550240.jpg' %}" class="d-block w-100 hero-img" alt="hero-3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- Intro container under the hero -->
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <h1 class="display-5">Find your next favorite mix</h1>
+        <p class="lead">Browse, listen, and share DJ mixes from across the community. Upload your own tracks and get discovered.</p>
+      </div>
+      <div class="col-md-4 text-md-end">
+        <a href="{% url 'upload_audio' %}" class="btn btn-lg btn-primary">Upload a mix</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
-  <h2>Audio Posts</h2>
-  {% if posts %}
-    <ul>
+  <section class="container mt-4">
+    <h2 class="mb-4">Discover</h2>
+    {% if posts %}
+    <div class="row g-4">
       {% for post in posts %}
-        <li>
-          <strong>{{ post.title }}</strong> by {{ post.user.username }}<br>
-          <audio controls>
-            <source src="{{ post.audio_file.url }}" type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-        </li>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100">
+          {% if post.audio_file.url %}
+          <div class="ratio ratio-16x9">
+            <audio class="w-100" controls>
+              <source src="{{ post.audio_file.url }}" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text text-muted">by {{ post.user.username }}</p>
+          </div>
+        </div>
+      </div>
       {% endfor %}
-    </ul>
+    </div>
+  </section>
   {% else %}
     <p>No audio posts yet.</p>
   {% endif %}
-  {% if user.is_authenticated %}
-    <a href="{% url 'upload_audio' %}">Upload new audio</a>
-  {% else %}
-    <p><a href="{% url 'login' %}">Login</a> to upload audio.</p>
-  {% endif %}
+
+    {% if user.is_authenticated %}
+      <p class="mt-3"><a class="btn btn-primary" href="{% url 'upload_audio' %}">Upload new audio</a></p>
+    {% else %}
+      <p class="mt-3"><a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a> to upload audio.</p>
+    {% endif %}
+
+  </section>
+
 {% endblock %}

@@ -180,9 +180,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_URL = 'static/'
+# Use a leading slash for STATIC_URL so generated static paths are absolute.
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Use WhiteNoise's storage backend for serving compressed static files in production.
+# Remember to run `python3 manage.py collectstatic` on deploy so files are copied to STATIC_ROOT.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files (user uploads)
 MEDIA_URL = '/media/'
