@@ -40,46 +40,57 @@
 {% endblock %}
 
 {% block content %}
-  <section id="discover" class="container mt-4">
-    <h2 class="mb-4">Discover</h2>
-    {% if posts %}
-    <div class="row g-4">
-      {% for post in posts %}
-      <div class="col-12 mix-col">
-        <div class="card h-100">
-          {% if post.audio_file.url %}
-          <div class="ratio ratio-16x9">
-            <audio class="w-100" controls>
-              <source src="{{ post.audio_file.url }}" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text text-muted">by {{ post.user.username }}</p>
-          </div>
+<section id="discover" class="container mt-4">
+  <h2 class="mb-4">Discover</h2>
+
+  {% if posts %}
+  <div class="row g-4">
+    {% for post in posts %}
+    <div class="col-12 mix-col">
+      <div class="card h-100">
+        {% if post.audio_file.url %}
+        <div class="ratio ratio-16x9 p-3">
+          <!-- Unique container with data attributes -->
+          <div id="waveform-{{ post.id }}"
+               class="waveform"
+               data-post-id="{{ post.id }}"
+               data-audio-url="{{ post.audio_file.url }}"></div>
+
+          <button class="btn btn-success btn-sm mt-2 playPause" data-post-id="{{ post.id }}">
+            ▶ Play / Pause
+          </button>
+        </div>
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text text-muted">by {{ post.user.username }}</p>
         </div>
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
+  </div>
 
-    {% if user.is_authenticated %}
-      <div class="row mt-3">
-        <div class="col-12 col-lg-auto">
-          <a class="btn btn-dark w-100 w-lg-auto" href="{% url 'upload_audio' %}">
-            <span class="d-none d-lg-inline">Upload&nbsp;new&nbsp;audio</span>
-            <span class="d-inline d-lg-none">Upload new audio</span>
-          </a>
-        </div>
-      </div>
-    {% else %}
-      <p class="mt-3"><a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a> to upload audio.</p>
-    {% endif %}
-
-  </section>
-
+  {% if user.is_authenticated %}
+  <div class="row mt-3">
+    <div class="col-12 col-lg-auto">
+      <a class="btn btn-dark w-100 w-lg-auto" href="{% url 'upload_audio' %}">
+        <span class="d-none d-lg-inline">Upload&nbsp;new&nbsp;audio</span>
+        <span class="d-inline d-lg-none">Upload new audio</span>
+      </a>
+    </div>
+  </div>
   {% else %}
-    <p>No audio posts yet.</p>
+  <p class="mt-3">
+    <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a> to upload audio.
+  </p>
   {% endif %}
+  {% else %}
+  <p>No mixes uploaded yet.</p>
+  {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<!-- Page-specific JS (after Wavesurfer is loaded in base.html) -->
+<script src="{% static 'mixes/js/wavesurfer-init.js' %}"></script>
 {% endblock %}
