@@ -30,15 +30,16 @@ if os.environ.get('CLOUDINARY_URL'):
         creds, cloud = _parts.split('@', 1)
         api_key, api_secret = creds.split(':', 1)
         cloud_name = cloud
-        cloudinary.config(cloud_name=cloud_name, api_key=api_key, api_secret=api_secret)
+        cloudinary.config(cloud_name=cloud_name, api_key=api_key, api_secret=api_secret, secure=True)
     except Exception:
         # Fallback to default behavior; cloudinary will raise a clearer error later
-        cloudinary.config()
+        cloudinary.config(secure=True)
 else:
     cloudinary.config(
         cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
         api_key=os.environ.get('CLOUDINARY_API_KEY'),
-        api_secret=os.environ.get('CLOUDINARY_API_SECRET')
+        api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+        secure=True
     )
 
 # Runtime check: ensure Cloudinary credentials are available in non-test runs.
