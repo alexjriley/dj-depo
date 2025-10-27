@@ -33,7 +33,7 @@
         <p class="lead">Browse, listen, and share DJ mixes from across the community. Upload your own tracks and get discovered.</p>
       </div>
       <div class="col-md-4 text-md-end">
-        <a href="{% url 'upload_audio' %}" class="btn btn-lg btn-primary">Upload a mix</a>
+        <a href="{% url 'upload_audio' %}" class="btn btn-lg btn-dark">Upload a mix</a>
       </div>
     </div>
   </div>
@@ -63,17 +63,23 @@
       </div>
       {% endfor %}
     </div>
-  </section>
-  {% else %}
-    <p>No audio posts yet.</p>
-  {% endif %}
 
     {% if user.is_authenticated %}
-      <p class="mt-3"><a class="btn btn-primary" href="{% url 'upload_audio' %}">Upload new audio</a></p>
+      <div class="row mt-3">
+        <div class="col-12 col-lg-auto">
+          <a class="btn btn-dark w-100 w-lg-auto" href="{% url 'upload_audio' %}">
+            <span class="d-none d-lg-inline">Upload&nbsp;new&nbsp;audio</span>
+            <span class="d-inline d-lg-none">Upload new audio</span>
+          </a>
+        </div>
+      </div>
     {% else %}
       <p class="mt-3"><a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a> to upload audio.</p>
     {% endif %}
 
   </section>
 
+  {% else %}
+    <p>No audio posts yet.</p>
+  {% endif %}
 {% endblock %}
