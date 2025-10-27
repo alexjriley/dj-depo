@@ -9,7 +9,7 @@
   --font-heading: 'Zilla Slab', 'Poppins', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, serif;
 
   /* Theme colors */
-  --color-primary: #06263f; /* brand green */
+  --color-primary: hsl(30, 33%, 5%); /* Smoky Black */
   --color-accent: #ff6b6b;  /* accent / highlight */
   --color-bg: #ffffff;
   --color-surface: #f8fafc;
@@ -44,25 +44,31 @@ body {
 /* Headings use Zilla Slab (slab serif) first, then fall back to Poppins/Inter */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.01em;
-}
-
-/* Slightly bolder brand */
-.navbar-brand {
-  font-weight: 600;
 }
 
 /* Slightly upscale navbar: more vertical space for branding and nav links */
 .navbar {
-  color: var(--color-primary);
-  padding-top: 0.85rem; /* increased from bootstrap default */
-  padding-bottom: 0.85rem;
-  min-height: 64px;
+  background-color: var(--color-bg);
+  padding-right: 0.85rem;
+  padding-left: 0.85rem;
+  min-height: 50px;
 }
 
 .navbar-brand {
   font-size: 1.125rem; /* slightly larger brand */
   line-height: 1;
+}
+
+/* Brand logo sizing: keep the image compact and responsive */
+.brand-logo {
+  max-height: 100px;
+  width: auto;
+  display: inline-block;
+}
+
+.navbar-nav {
+  font-family: var(--font-sans);
+  font-size: 1.25rem; /* ~20px, more responsive */
 }
 
 .navbar-nav .nav-link {
@@ -123,7 +129,7 @@ img, video {
 }
 
 /* Final safety: clip any accidental horizontal overflow on very small viewports */
-html, body {
+body {
   overflow-x: hidden;
 }
 
@@ -143,9 +149,7 @@ html, body {
 }
 
 /* If Bootstrap specificity still wins, increase specificity for the override */
-.container #discover .mix-col .card {
-  background-color: var(--color-surface);
-}
+/* (Removed .container #discover .mix-col .card as #discover .mix-col .card is sufficient) */
 
 /* ----------------------------
    Standard breakpoint media queries
@@ -160,7 +164,10 @@ html, body {
     height: 32vh;
   }
   .navbar {
-    min-height: 3vh;
+    min-height: 5vh;
+  }
+  .navbar-nav {
+    font-size: 1rem; /* ~16px for better fit on small screens */
   }
 }
 
@@ -195,6 +202,7 @@ html, body {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
     align-items: start;
+    
   }
 
   /* allow grid children to shrink and avoid overflowing due to long words or media */
@@ -215,7 +223,7 @@ html, body {
   }
 
   .navbar {
-    min-height: 9vh;
+    min-height: 8vh;
   }
 }
 
