@@ -4,7 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Select all waveform containers rendered by Django
   document.querySelectorAll('[data-audio-url]').forEach(div => {
     const id = div.dataset.postId;
-    const audioUrl = div.dataset.audioUrl;
+    let audioUrl = div.dataset.audioUrl;
+
+    // Quick fix for mixed-content: force HTTPS if an HTTP URL was stored.
+    // This prevents browsers from blocking the fetch when the page is HTTPS.
+    if (audioUrl && audioUrl.startsWith('http://')) {
+      console.warn('[wavesurfer] replacing insecure audio URL with HTTPS for post', id, audioUrl);
+      audioUrl = audioUrl.replace(/^http:\/\//i, 'https://');
+    }
 
     const wavesurfer = WaveSurfer.create({
       container: div,
@@ -15,8 +22,34 @@ document.addEventListener('DOMContentLoaded', function() {
       responsive: true,
     });
 
-    wavesurfer.load(audioUrl);
-    waveforms[id] = wavesurfer;
+    // Surface load errors in console and show a minimal fallback UI
+    wavesurfer.on('error', err => {
+      console.error('[wavesurfer] error loading waveform for post', id, err);
+      // Add a small fallback message if not already present
+      if (!div.querySelector('.wave-error')) {
+        const msg = document.createElement('div');
+        msg.className = 'wave-error';
+        msg.textContent = 'Waveform unavailable — click play to listen.';
+        msg.style.color = '#bbb';
+        msg.style.fontSize = '0.9rem';
+        msg.style.marginTop = '0.5rem';
+        div.appendChild(msg);
+      }
+    });
+
+    wavesurfer.on('ready', () => {
+      // ready — nothing special for now, but helpful if you want to
+      // enable UI controls for duration, etc.
+      console.debug('[wavesurfer] ready for post', id);
+    });
+
+    // Attempt to load the (possibly rewritten) audio URL
+    if (audioUrl) {
+      wavesurfer.load(audioUrl);
+      waveforms[id] = wavesurfer;
+    } else {
+      console.warn('[wavesurfer] no audio URL for post', id);
+    }
   });
 
   // Play/pause buttons
