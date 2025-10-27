@@ -1,42 +1,30 @@
 /* Project custom styles */
+/* (root variables moved lower in file; primary root with full variables exists below) */
 
 /* Typography: use Google Fonts loaded in base.html */
-body {
-  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #111827;
-}
 
-/* Headings use an edgy slab-serif (Roboto Slab) first, then fall back to Poppins/Inter */
-/* Headings use Zilla Slab (slab serif) first, then fall back to Poppins/Inter */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Zilla Slab', 'Poppins', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, serif;
-  letter-spacing: -0.01em;
-}
-
-/* Slightly bolder brand */
-.navbar-brand {
-  font-weight: 600;
-}
-
-/* Slightly upscale navbar: more vertical space for branding and nav links */
-.navbar {
-  padding-top: 0.85rem; /* increased from bootstrap default */
-  padding-bottom: 0.85rem;
-  min-height: 64px;
-}
-
-.navbar-brand {
-  font-size: 1.125rem; /* slightly larger brand */
-  line-height: 1;
-}
-
-.navbar-nav .nav-link {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-/* Responsive type scale using clamp() for better legibility across devices */
 :root {
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: 'Zilla Slab', 'Poppins', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, serif;
+
+  /* Theme colors */
+  --color-primary: hsl(30, 33%, 5%); /* Smoky Black */
+  --color-accent: #ff6b6b;  /* accent / highlight */
+  --color-bg: #ffffff;
+  --color-surface: #f8fafc;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+
+  /* Waveform colors (used by WaveSurfer) */
+  --wave-fill: #ccc;
+  --wave-progress: var(--color-primary);
+
+  /* Layout */
+  --max-content-width: 1200px;
+
   /* Base font size: fluid between 14px and 18px */
   --fs-base: clamp(0.875rem, 0.85rem + 0.3vw, 1.125rem); /* ~14px - 18px */
   --fs-scale-1: clamp(1.125rem, 1.05rem + 1.0vw, 1.5rem); /* h6 / small headings */
@@ -46,6 +34,49 @@ h1, h2, h3, h4, h5, h6 {
   /* Make h1 more dramatic: larger max size and stronger scaling */
   --fs-scale-5: clamp(2.25rem, 2.0rem + 5.0vw, 4.5rem); /* h1 */
 }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* Headings use Zilla Slab (slab serif) first, then fall back to Poppins/Inter */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Slightly upscale navbar: more vertical space for branding and nav links */
+.navbar {
+  background-color: var(--color-bg);
+  padding-right: 0.85rem;
+  padding-left: 0.85rem;
+  min-height: 50px;
+}
+
+.navbar-brand {
+  font-size: 1.125rem; /* slightly larger brand */
+  line-height: 1;
+}
+
+/* Brand logo sizing: keep the image compact and responsive */
+.brand-logo {
+  max-height: 100px;
+  width: auto;
+  display: inline-block;
+}
+
+.navbar-nav {
+  font-family: var(--font-sans);
+  font-size: 1.25rem; /* ~20px, more responsive */
+}
+
+.navbar-nav .nav-link {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Responsive type scale using clamp() for better legibility across devices */
 
 html { font-size: var(--fs-base); }
 
@@ -98,10 +129,27 @@ img, video {
 }
 
 /* Final safety: clip any accidental horizontal overflow on very small viewports */
-html, body {
+body {
   overflow-x: hidden;
 }
 
+
+/* Theme overrides: ensure card background and buttons follow theme variables */
+/* Keep this before the media queries so it applies across breakpoints */
+#discover .mix-col .card {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* Buttons inside cards should use brand primary by default */
+#discover .mix-col .card .btn {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+/* If Bootstrap specificity still wins, increase specificity for the override */
+/* (Removed .container #discover .mix-col .card as #discover .mix-col .card is sufficient) */
 
 /* ----------------------------
    Standard breakpoint media queries
@@ -116,7 +164,10 @@ html, body {
     height: 32vh;
   }
   .navbar {
-    min-height: 3vh;
+    min-height: 5vh;
+  }
+  .navbar-nav {
+    font-size: 1rem; /* ~16px for better fit on small screens */
   }
 }
 
@@ -151,6 +202,7 @@ html, body {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
     align-items: start;
+    
   }
 
   /* allow grid children to shrink and avoid overflowing due to long words or media */
@@ -171,7 +223,7 @@ html, body {
   }
 
   .navbar {
-    min-height: 9vh;
+    min-height: 8vh;
   }
 }
 
@@ -182,5 +234,4 @@ html, body {
     height: 42vh;
   }
 }
-
 

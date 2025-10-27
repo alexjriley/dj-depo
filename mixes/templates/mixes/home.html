@@ -28,9 +28,9 @@
   <!-- Intro container under the hero -->
   <div class="container py-5">
     <div class="row align-items-center">
-      <div class="col-md-8">
-        <h1 class="display-5">Find your next favorite mix</h1>
-        <p class="lead">Browse, listen, and share DJ mixes from across the community. Upload your own tracks and get discovered.</p>
+      <div class="col-md-8 col-lg-8">
+        <h1 class="display-4">Find your next favorite mix</h1>
+        <p>Browse, listen, and share DJ mixes from across the community.</p>
       </div>
       <div class="col-md-4 text-md-end">
         <a href="{% url 'upload_audio' %}" class="btn btn-lg btn-dark">Upload a mix</a>
@@ -41,7 +41,7 @@
 
 {% block content %}
 <section id="discover" class="container mt-4">
-  <h2 class="mb-4">Discover</h2>
+  <h2 class="mb-4 text-center">Discover</h2>
 
   {% if posts %}
   <div class="row g-4">
