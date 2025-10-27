@@ -42,8 +42,19 @@ else:
     )
 
 # Runtime check: ensure Cloudinary credentials are available in non-test runs.
-# This raises a clear error early if credentials are missing on deploy (so failures are obvious).
-if 'test' not in sys.argv:
+# By default we enforce credentials to fail fast on misconfiguration. However,
+# some management commands (for example `collectstatic`) and CI jobs may not
+# need real Cloudinary credentials. To allow those workflows to proceed without
+# setting production secrets, we support an opt-in skip via the
+# `SKIP_CLOUDINARY_CHECK=1` environment variable. Skipping is intentionally
+# conservative and must be enabled explicitly.
+
+# Determine whether to skip the check. Always skip during test runs.
+_skip_for_tests = 'test' in sys.argv
+_skip_env = os.environ.get('SKIP_CLOUDINARY_CHECK') == '1'
+_skip_for_commands = any(cmd in sys.argv for cmd in ('collectstatic', 'check'))
+
+if not (_skip_for_tests or _skip_env or _skip_for_commands):
     if not (
         os.environ.get('CLOUDINARY_URL')
         or (
@@ -55,8 +66,16 @@ if 'test' not in sys.argv:
         raise RuntimeError(
             "Cloudinary credentials are missing. Set either CLOUDINARY_URL or the three vars: "
             "CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET. "
+            "To bypass this check in CI for allowed commands set SKIP_CLOUDINARY_CHECK=1. "
             "On Heroku run: heroku config:set CLOUDINARY_URL='cloudinary://<key>:<secret>@<name>' -a <appname>"
         )
+else:
+    # Make skipping visible in logs/console so deploys show the decision.
+    import warnings
+
+    warnings.warn(
+        "Cloudinary credential check skipped (test run, SKIP_CLOUDINARY_CHECK, or allowed command)."
+    )
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
