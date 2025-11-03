@@ -1,12 +1,11 @@
-/* Project custom styles */
-/* (root variables moved lower in file; primary root with full variables exists below) */
+/* Google fonts import */
 
-/* Typography: use Google Fonts loaded in base.html */
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
   /* Fonts */
-  --font-sans: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-heading: 'Zilla Slab', 'Poppins', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, serif;
+  --font-sans: 'Noto Sans';
+  --font-heading: 'Momo Trust Display';
 
   /* Theme colors */
   --color-primary: hsl(30, 33%, 5%); /* Smoky Black */
@@ -19,7 +18,7 @@
   --color-danger: #ef4444;
 
   /* Waveform colors (used by WaveSurfer) */
-  --wave-fill: #ccc;
+  --wave-fill: var(--color-text);
   --wave-progress: var(--color-primary);
 
   /* Layout */
@@ -31,19 +30,40 @@
   --fs-scale-2: clamp(1.25rem, 1.15rem + 1.25vw, 1.75rem); /* h4 */
   --fs-scale-3: clamp(1.5rem, 1.35rem + 1.75vw, 2.25rem); /* h3 */
   --fs-scale-4: clamp(2rem, 1.9rem + 2.5vw, 3rem); /* h2 */
-  /* Make h1 more dramatic: larger max size and stronger scaling */
-  --fs-scale-5: clamp(2.25rem, 2.0rem + 5.0vw, 4.5rem); /* h1 */
+
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
   background-color: var(--color-bg);
+
 }
 
-/* Headings use Zilla Slab (slab serif) first, then fall back to Poppins/Inter */
-h1, h2, h3, h4, h5, h6 {
+main {
+  margin: auto;
+}
+
+section {
+  padding-bottom: 4px;
+}
+
+/* Headings */
+h1, h3 {
   font-family: var(--font-heading);
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+h2, h4, h5, h6 {
+  font-family: var(--font-heading);
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
 }
 
 /* Slightly upscale navbar: more vertical space for branding and nav links */
@@ -55,15 +75,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-brand {
-  font-size: 1.125rem; /* slightly larger brand */
-  line-height: 1;
-}
-
-/* Brand logo sizing: keep the image compact and responsive */
-.brand-logo {
+  font-family: var(--font-heading);
   max-height: 100px;
-  width: auto;
-  display: inline-block;
+  font-size: var(--fs-scale-3);
 }
 
 .navbar-nav {
@@ -82,14 +96,10 @@ html { font-size: var(--fs-base); }
 
 h1 {
   font-size: var(--fs-scale-5);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.02;
   letter-spacing: -0.03em;
   margin-bottom: 0.6rem;
-  /* subtle lift for headings */
-  text-rendering: optimizeLegibility;
-  /* serif-specific styling for a slightly edgier look */
-  text-transform: none;
 }
 h2 { font-size: var(--fs-scale-4); }
 h3 { font-size: var(--fs-scale-3); }
@@ -97,7 +107,7 @@ h4 { font-size: var(--fs-scale-2); }
 h5, h6 { font-size: var(--fs-scale-1); }
 
 
-/* Hero carousel image - take up 40% of the viewport height */
+/* Hero carousel image */
 .hero-img {
   height: 40vh;
   object-fit: cover;
@@ -110,17 +120,6 @@ h5, h6 { font-size: var(--fs-scale-1); }
   background-size: 2rem 2rem;
 }
 
-/* Slight spacing for the Discover section */
-section.container h2 {
-  margin-top: 0.25rem;
-  margin-bottom: 1.25rem;
-}
-
-/* Card audio sizing tweaks */
-.card .ratio audio {
-  height: 100%;
-}
-
 /* Ensure images and media can't force horizontal overflow */
 img, video {
   max-width: 100%;
@@ -128,24 +127,22 @@ img, video {
   display: block;
 }
 
-/* Final safety: clip any accidental horizontal overflow on very small viewports */
-body {
-  overflow-x: hidden;
-}
-
-
-/* Theme overrides: ensure card background and buttons follow theme variables */
-/* Keep this before the media queries so it applies across breakpoints */
-#discover .mix-col .card {
-  background-color: var(--color-surface);
-  color: var(--color-text);
-}
-
-/* Buttons inside cards should use brand primary by default */
 #discover .mix-col .card .btn {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
-  color: white;
+  background: url(images/cover-mix-discover.jpeg) no-repeat;
+}
+
+/* Upload audio custom styling */
+
+.upload-audio {
+  padding-top: 4px;
+}
+
+/* Footer */
+
+.footer {
+  background-color: rgb(0, 0, 0);
 }
 
 /* If Bootstrap specificity still wins, increase specificity for the override */

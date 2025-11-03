@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="upload-audio">
   <h2>Upload Audio</h2>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -7,3 +8,5 @@
     <button type="submit">Upload</button>
   </form>
 {% endblock %}
+</div>
+
