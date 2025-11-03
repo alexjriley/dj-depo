@@ -26,13 +26,13 @@
   </div>
 
   <!-- Intro container under the hero -->
-  <div class="container py-5">
+  <div class="container mt-4">
     <div class="row align-items-center">
-      <div class="col-md-8 col-lg-8">
+      <div class="col-lg-8 col-md-8">
         <h1 class="display-4">Find your next favorite mix</h1>
         <p class="lead">Browse, listen, and share DJ mixes from across the community.</p>
       </div>
-      <div class="col-md-4 text-md-end">
+      <div class="col-lg-4 col-md-4">
         <a href="{% url 'upload_audio' %}" class="btn btn-lg btn-dark">Upload a mix</a>
       </div>
     </div>
@@ -48,7 +48,7 @@
     {% for post in posts %}
     <div class="col-12 mix-col">
       <div class="card h-100">
-        {% if post.audio_file.url %}
+        {% if post.audio_file and post.audio_file.url %}
         <div class="ratio ratio-16x9 p-3">
           <!-- Unique container with data attributes -->
           <div id="waveform-{{ post.id }}"
@@ -81,7 +81,7 @@
   </div>
   {% else %}
   <p class="mt-3">
-    <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a> to upload audio.
+    <a class="btn btn-outline-primary" href="{% url 'login' %}">Log in</a> to upload audio.
   </p>
   {% endif %}
   {% else %}
@@ -92,5 +92,5 @@
 {% endblock %}
 {% block extra_scripts %}
 <!-- Page-specific JS (after Wavesurfer is loaded in base.html) -->
-<script src="{% static 'mixes/js/wavesurfer-init.js' %}"></script>
+<script src="{% static 'mixes/js/wavesurfer-init.js' %}" defer></script>
 {% endblock %}
