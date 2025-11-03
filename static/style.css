@@ -31,8 +31,7 @@
   --fs-scale-2: clamp(1.25rem, 1.15rem + 1.25vw, 1.75rem); /* h4 */
   --fs-scale-3: clamp(1.5rem, 1.35rem + 1.75vw, 2.25rem); /* h3 */
   --fs-scale-4: clamp(2rem, 1.9rem + 2.5vw, 3rem); /* h2 */
-  /* Make h1 more dramatic: larger max size and stronger scaling */
-  --fs-scale-5: clamp(2.25rem, 2.0rem + 5.0vw, 4.5rem); /* h1 */
+
 }
 
 body {
@@ -146,6 +145,18 @@ body {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   color: white;
+}
+
+/* Upload audio custom styling */
+
+.upload-audio {
+  padding-top: 4px;
+}
+
+/* Footer */
+
+.footer {
+  background-color: red;
 }
 
 /* If Bootstrap specificity still wins, increase specificity for the override */
