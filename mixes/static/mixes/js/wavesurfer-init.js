@@ -5,7 +5,28 @@ document.addEventListener('DOMContentLoaded', function() {
   const _docStyles = getComputedStyle(document.documentElement);
   const _waveFill = (_docStyles.getPropertyValue('--wave-fill') || '#ccc').trim();
   const _waveProgress = (_docStyles.getPropertyValue('--wave-progress') || '#1db954').trim();
-  const _cursorColor = (_docStyles.getPropertyValue('--color-bg') || '#fff').trim();
+  const _cursorColor = (_docStyles.getPropertyValue('--cursor-color') || '#fff').trim();
+
+  // Helper: convert hex color (#rgb or #rrggbb) to rgba string with alpha
+  function hexToRgba(hex, alpha) {
+    if (!hex) return `rgba(0,0,0,${alpha})`;
+    const h = hex.replace('#', '').trim();
+    if (h.length === 3) {
+      const r = parseInt(h[0] + h[0], 16);
+      const g = parseInt(h[1] + h[1], 16);
+      const b = parseInt(h[2] + h[2], 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    if (h.length === 6) {
+      const r = parseInt(h.substr(0,2), 16);
+      const g = parseInt(h.substr(2,2), 16);
+      const b = parseInt(h.substr(4,2), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    // fallback: return original string (could be rgb/rgba already)
+    return hex;
+  }
+  const _waveProgressRgba = hexToRgba(_waveProgress, 0.45);
 
   // Select all waveform containers rendered by Django
   document.querySelectorAll('[data-audio-url]').forEach(div => {
@@ -22,10 +43,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const wavesurfer = WaveSurfer.create({
       container: div,
       waveColor: _waveFill,
-      progressColor: _waveProgress,
+      // use a semi-transparent progress color so waveform detail shows through
+      progressColor: _waveProgressRgba,
       cursorColor: _cursorColor,
-      height: 80,
+      // increase height for better visibility and use a bar-style rendering
+      height: 120,
       responsive: true,
+      barWidth: 3,
+      barGap: 2,
+      barRadius: 2,
+      normalize: true,
     });
 
     // Inject ::part() CSS rules for the wavesurfer host so theme colors apply
@@ -41,9 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const styleId = `wavesurfer-parts-${tag}`;
       if (document.getElementById(styleId)) return; // already injected
 
-      const css = `
+  const css = `
 ${tag}::part(wave) { background: ${_waveFill} !important; }
-${tag}::part(progress) { background: ${_waveProgress} !important; }
+${tag}::part(progress) { background: ${_waveProgressRgba} !important; }
 ${tag}::part(cursor) { background: ${_cursorColor} !important; }
 ${tag}::part(timeline) { color: ${_docStyles.getPropertyValue('--color-muted').trim() || '#6b7280'}; }
 `;
@@ -84,20 +111,34 @@ ${tag}::part(timeline) { color: ${_docStyles.getPropertyValue('--color-muted').t
     }
   });
 
+  // Track currently playing waveform
+  let currentlyPlayingId = null;
+
   // Play/pause buttons
   document.querySelectorAll('.playPause').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.postId;
       const ws = waveforms[id];
 
-      // Optional: pause all others first
-      for (const key in waveforms) {
-        if (parseInt(key) !== parseInt(id)) {
-          waveforms[key].pause();
-        }
+      // Pause only the currently playing waveform if it's different
+      if (currentlyPlayingId && currentlyPlayingId !== id) {
+        const prevWs = waveforms[currentlyPlayingId];
+        if (prevWs) prevWs.pause();
       }
 
-      ws.playPause();
+      if (ws) {
+        ws.playPause();
+      } else {
+        console.warn('[wavesurfer] No waveform found for post', id);
+        return;
+      }
+
+      // Update currently playing id if playing, otherwise clear
+      if (ws.isPlaying()) {
+        currentlyPlayingId = id;
+      } else {
+        currentlyPlayingId = null;
+      }
     });
   });
 });
