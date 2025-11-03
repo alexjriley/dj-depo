@@ -20,16 +20,14 @@
   <!-- Google Fonts: Inter (body), Poppins (UI), Zilla Slab (headings - slab serif) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600;700&family=Zilla+Slab:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Project CSS -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="{{ STATIC_URL }}images/logo-wide-dj.jpeg" alt="DJ Depo" class="brand-logo d-inline-block align-text-top">
-        <span class="visually-hidden">DJ Depo</span>
+      <a class="navbar-brand">
+        <span>DJ Depo</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -58,6 +56,8 @@
       </div>
     </div>
   </nav>
+
+  <main>
   {# Hero block (full-width) - pages can override #}
   {% block hero %}{% endblock %}
 
@@ -75,13 +75,13 @@
   </div>
 
 <!-- Uploading instructions section -->
-  <section id="how-to-upload">
-    <h2 class="mt-4 text-center">Upload</h2>
+  <section>
+    <h2 class="mt-4">Share yours</h2>
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 col-md-12 mt-4">
+        <div class="col-lg-6 col-md-12">
       <h3>
-        Using the platform
+        To use the platform:
       </h3>
       <br>
       <ul>
@@ -94,7 +94,8 @@
         </li>
         <br>
         <li>
-          Share your mix with the world
+          <i class="fa-solid fa-globe"></i> Give it a name 
+          + share
         </li>
       </ul>
       </div>
@@ -104,15 +105,18 @@
     </div>
   </section>
 
-  <footer id="footer" class="mt-6">
-    <div class="text-center">
-      Find us on social media
+  </main>
+
+  <footer id="footer">
+    <div class="mt-4">
+      <h4>Find us on social media
+      </h4>
+      <p class="text-center">
       <br>
-      Mastodon
+      <a href="#">Mastodon</a>
       <br>
-      Instagram
-      <br>
-      Discord
+      <a href="#">Discord</a>
+      </p>
     </div>
     <div class="text-center p-3">
     © {{ now|date:"Y" }} Alex Riley
