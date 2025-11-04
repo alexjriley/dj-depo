@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+<section id="hero-signup">
+  <img src="{% static 'images/pexels-odin-reyna-383507-8673525.jpg' %}" class="hero-signup-img" alt="A rave in an industrial warehouse with a balcony">
+</section>
   <h2>Sign Up</h2>
   <form method="post">
     {% csrf_token %}
