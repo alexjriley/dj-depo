@@ -27,6 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
     return hex;
   }
   const _waveProgressRgba = hexToRgba(_waveProgress, 0.45);
+  const _waveProgressRgbaStrong = hexToRgba(_waveProgress, 0.35);
+
+  // Format seconds -> M:SS
+  function formatTime(seconds) {
+    if (!seconds || isNaN(seconds) || seconds <= 0) return '0:00';
+    const s = Math.floor(seconds % 60);
+    const m = Math.floor(seconds / 60);
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  }
 
   // Select all waveform containers rendered by Django
   document.querySelectorAll('[data-audio-url]').forEach(div => {
@@ -68,17 +77,56 @@ document.addEventListener('DOMContentLoaded', function() {
       const styleId = `wavesurfer-parts-${tag}`;
       if (document.getElementById(styleId)) return; // already injected
 
-  const css = `
-${tag}::part(wave) { background: ${_waveFill} !important; }
-${tag}::part(progress) { background: ${_waveProgressRgba} !important; }
-${tag}::part(cursor) { background: ${_cursorColor} !important; }
-${tag}::part(timeline) { color: ${_docStyles.getPropertyValue('--color-muted').trim() || '#6b7280'}; }
-`;
+   const css = `
+   ${tag}::part(wave) { background: ${_waveFill} !important; }
+   /* use the precomputed rgba progress color so the overlay is translucent
+     and blend it with the waveform using mix-blend-mode to avoid blocking
+     the bar detail. multiply is a safe default; change to 'overlay' or
+     'screen' if you'd like a different visual effect. */
+  /* use a thin vertical gradient so the progress overlay doesn't form a
+    solid rectangle — center is stronger while top/bottom are transparent */
+  ${tag}::part(progress) { background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, ${_waveProgressRgbaStrong} 50%, rgba(0,0,0,0) 100%) !important; mix-blend-mode: overlay !important; }
+   ${tag}::part(cursor) { background: ${_cursorColor} !important; }
+   ${tag}::part(timeline) { color: ${_docStyles.getPropertyValue('--color-muted').trim() || '#6b7280'}; }
+   `;
 
       const s = document.createElement('style');
       s.id = styleId;
       s.appendChild(document.createTextNode(css));
       document.head.appendChild(s);
+    })();
+
+    // Fallback: try to access the shadowRoot and style the internal progress element
+    // directly. Some browsers (Chrome) can render parts in a way that prevents
+    // blending from the outside; this attempts to set inline styles inside the
+    // shadow root for best compatibility.
+    (function applyShadowProgressStyles(retries = 0) {
+      try {
+        const host = div.firstElementChild;
+        if (host && host.shadowRoot) {
+          const prog = host.shadowRoot.querySelector('[part="progress"]');
+          const waveEl = host.shadowRoot.querySelector('[part="wave"]');
+          if (prog) {
+            // apply a thin vertical gradient into the shadow DOM so the progress
+            // area doesn't cover bar detail. Use a stronger center color and
+            // transparent edges.
+            const grad = `linear-gradient(to bottom, rgba(0,0,0,0) 0%, ${_waveProgressRgbaStrong} 50%, rgba(0,0,0,0) 100%)`;
+            prog.style.background = grad;
+            prog.style.mixBlendMode = 'overlay';
+            prog.style.opacity = '1';
+          }
+          if (waveEl) {
+            waveEl.style.background = _waveFill;
+          }
+          return;
+        }
+      } catch (e) {
+        // ignore and retry
+      }
+      // retry a few times to account for rendering timing
+      if (retries < 8) {
+        setTimeout(() => applyShadowProgressStyles(retries + 1), 80);
+      }
     })();
 
     // Surface load errors in console and show a minimal fallback UI
@@ -97,9 +145,42 @@ ${tag}::part(timeline) { color: ${_docStyles.getPropertyValue('--color-muted').t
     });
 
     wavesurfer.on('ready', () => {
-      // ready — nothing special for now, but helpful if you want to
-      // enable UI controls for duration, etc.
       console.debug('[wavesurfer] ready for post', id);
+      // Enable the play button and set duration
+      const btn = document.querySelector(`.playPause[data-post-id="${id}"]`);
+      const timeEl = document.getElementById(`mix-time-${id}`);
+      try {
+        const duration = wavesurfer.getDuration();
+        if (timeEl) timeEl.textContent = `${formatTime(0)} / ${formatTime(duration)}`;
+      } catch (e) {
+        // ignore
+      }
+      if (btn) {
+        btn.disabled = false;
+        btn.setAttribute('aria-pressed', 'false');
+      }
+
+      // Update on audioprocess to show elapsed time
+      wavesurfer.on('audioprocess', (time) => {
+        const tEl = document.getElementById(`mix-time-${id}`);
+        if (tEl) {
+          const dur = wavesurfer.getDuration() || 0;
+          tEl.textContent = `${formatTime(time)} / ${formatTime(dur)}`;
+        }
+      });
+
+      wavesurfer.on('finish', () => {
+        // reset button UI when finished
+        const b = document.querySelector(`.playPause[data-post-id="${id}"]`);
+        if (b) {
+          b.classList.remove('playing');
+          b.setAttribute('aria-pressed', 'false');
+          const playI = b.querySelector('.icon-play');
+          const pauseI = b.querySelector('.icon-pause');
+          if (playI) playI.classList.remove('d-none');
+          if (pauseI) pauseI.classList.add('d-none');
+        }
+      });
     });
 
     // Attempt to load the (possibly rewritten) audio URL
@@ -116,29 +197,55 @@ ${tag}::part(timeline) { color: ${_docStyles.getPropertyValue('--color-muted').t
 
   // Play/pause buttons
   document.querySelectorAll('.playPause').forEach(btn => {
+    // initialize buttons disabled until corresponding wavesurfer is ready
+    btn.disabled = true;
     btn.addEventListener('click', () => {
       const id = btn.dataset.postId;
       const ws = waveforms[id];
+
+      if (!ws) {
+        console.warn('[wavesurfer] No waveform found for post', id);
+        return;
+      }
 
       // Pause only the currently playing waveform if it's different
       if (currentlyPlayingId && currentlyPlayingId !== id) {
         const prevWs = waveforms[currentlyPlayingId];
         if (prevWs) prevWs.pause();
+        const prevBtn = document.querySelector(`.playPause[data-post-id="${currentlyPlayingId}"]`);
+        if (prevBtn) {
+          prevBtn.classList.remove('playing');
+          prevBtn.setAttribute('aria-pressed', 'false');
+          const playI = prevBtn.querySelector('.icon-play');
+          const pauseI = prevBtn.querySelector('.icon-pause');
+          if (playI) playI.classList.remove('d-none');
+          if (pauseI) pauseI.classList.add('d-none');
+        }
       }
 
-      if (ws) {
-        ws.playPause();
-      } else {
-        console.warn('[wavesurfer] No waveform found for post', id);
-        return;
-      }
+      ws.playPause();
 
-      // Update currently playing id if playing, otherwise clear
-      if (ws.isPlaying()) {
-        currentlyPlayingId = id;
-      } else {
-        currentlyPlayingId = null;
-      }
+      // Update button UI based on playing state
+      setTimeout(() => {
+        const isPlaying = ws.isPlaying();
+        if (isPlaying) {
+          currentlyPlayingId = id;
+          btn.classList.add('playing');
+          btn.setAttribute('aria-pressed', 'true');
+          const playI = btn.querySelector('.icon-play');
+          const pauseI = btn.querySelector('.icon-pause');
+          if (playI) playI.classList.add('d-none');
+          if (pauseI) pauseI.classList.remove('d-none');
+        } else {
+          if (currentlyPlayingId === id) currentlyPlayingId = null;
+          btn.classList.remove('playing');
+          btn.setAttribute('aria-pressed', 'false');
+          const playI = btn.querySelector('.icon-play');
+          const pauseI = btn.querySelector('.icon-pause');
+          if (playI) playI.classList.remove('d-none');
+          if (pauseI) pauseI.classList.add('d-none');
+        }
+      }, 50);
     });
   });
 });

@@ -26,7 +26,7 @@
   </div>
 
   <!-- Intro container under the hero -->
-  <div class="container mt-4">
+  <div id="intro" class="container mt-4">
     <div class="row align-items-center">
       <div class="col-lg-8 col-md-8">
         <h1 class="display-4">Find your next favorite mix</h1>
@@ -48,23 +48,32 @@
     {% for post in posts %}
     <div class="col-12 mix-col">
       <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text text-muted">by {{ post.user.username }}</p>
+        </div>
         {% if post.audio_file and post.audio_file.url %}
-        <div class="ratio ratio-16x9 p-3">
+        <div class="p-3">
           <!-- Unique container with data attributes -->
           <div id="waveform-{{ post.id }}"
                class="waveform"
                data-post-id="{{ post.id }}"
                data-audio-url="{{ post.audio_file.url }}"></div>
-
-          <button class="btn btn-success btn-sm mt-2 playPause" data-post-id="{{ post.id }}">
-            ▶ Play / Pause
+        </div>
+        <div class="p-3 text-center mix-controls d-flex justify-content-center align-items-center gap-2">
+          <button class="btn btn-success btn-sm playPause" data-post-id="{{ post.id }}" aria-pressed="false" disabled>
+            <!-- Inline SVG icon toggled by JS (play / pause) -->
+            <svg class="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            <svg class="icon-pause d-none" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+            <span class="visually-hidden">Play</span>
           </button>
+          <div class="mix-time" id="mix-time-{{ post.id }}">&nbsp;0:00 / 0:00</div>
         </div>
         {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{ post.title }}</h5>
-          <p class="card-text text-muted">by {{ post.user.username }}</p>
-        </div>
       </div>
     </div>
     {% endfor %}
