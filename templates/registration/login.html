@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
-<section id="hero-login" style="margin:0; padding:0;">
-  <img src="{% static 'images/pexels-odin-reyna-383507-8673525.jpg' %}" class="hero-signup-img" alt="A rave in an industrial warehouse with a balcony">
+{% block hero %}
+<section id="hero-signup">
+  <div class="container-fluid px-0">
+    <img src="{% static 'images/pexels-odin-reyna-383507-8673525.jpg' %}" class="hero-signup-img" alt="A rave in an industrial warehouse with a balcony">
+  </div>
 </section>
+{% endblock %}
+
+{% block content %}
 <div class="login-container">
   <h2>Login to Your Account</h2>
   
