@@ -10,12 +10,16 @@
 
 {% block content %}
 <div class="upload-audio">
-  <h2>Upload Audio</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-  </form>
+  <div class="form-card">
+    <h2 class="form-card-title">Upload Audio</h2>
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="form-actions">
+        <button type="submit" class="btn btn-dark w-100">Upload</button>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
 

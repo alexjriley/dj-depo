@@ -9,11 +9,15 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Sign Up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-  </form>
-  <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+  <div class="form-card">
+    <h2 class="form-card-title">Sign Up</h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="form-actions">
+        <button type="submit" class="btn btn-dark w-100">Sign Up</button>
+      </div>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+  </div>
 {% endblock %}
