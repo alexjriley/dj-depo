@@ -1,4 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block hero %}
+<section id="hero-signup">
+  <div class="container-fluid px-0">
+    <img src="{% static 'images/pexels-odin-reyna-383507-8673525.jpg' %}" class="hero-signup-img" alt="A rave in an industrial warehouse with a balcony">
+  </div>
+</section>
+{% endblock %}
+
 {% block content %}
 <div class="upload-audio">
   <h2>Upload Audio</h2>
@@ -7,6 +16,7 @@
     {{ form.as_p }}
     <button type="submit">Upload</button>
   </form>
-{% endblock %}
 </div>
+{% endblock %}
+
 
