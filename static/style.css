@@ -246,17 +246,6 @@ img, video {
   padding-top: 4px;
 }
 
-/* Login to your account */
-
-.login-container section {
-  padding: 40px;
-}
-
-.login-container h2 {
-  padding-bottom: 40px;
-  padding-top: 40px;
-}
-
 /* Upload audio - user only */
 
 .upload-audio h2 {
@@ -275,6 +264,79 @@ img, video {
 
 #footer p {
   font-size: 1.2rem;
+}
+
+/* Reusable form card */
+
+.form-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(0,0,0,0.06);
+  max-width: 520px;
+  margin: 2.25rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem; /* vertical spacing between direct children */
+  box-sizing: border-box;
+}
+
+.form-card-title {
+  padding-bottom: 0.25rem;
+  margin: 0;
+  text-align: center;
+}
+
+.form-card .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  text-align: left;
+}
+
+/* Form controls inside .form-card: make them full width and evenly spaced */
+.form-card input,
+.form-card textarea,
+.form-card select,
+.form-card .form-control {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(15,23,42,0.08);
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.form-card input:focus,
+.form-card textarea:focus,
+.form-card select:focus,
+.form-card .form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255,107,107,0.12);
+  border-color: rgba(255,107,107,0.35);
+}
+
+/* Actions (submit button) */
+.form-card .form-actions {
+  margin-top: 0.25rem;
+}
+
+.form-card .form-actions .btn,
+.form-card button {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Small tweak for error message inside the card */
+.form-card .error {
+  color: var(--color-danger);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
 }
 
 /* If Bootstrap specificity still wins, increase specificity for the override */
