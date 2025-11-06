@@ -3,7 +3,6 @@
 
 {% block hero %}
   <!-- Full width hero carousel -->
-   <section class="carousel-section">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -25,7 +24,6 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  </section>
 
   <!-- Intro container under the hero -->
   <section class="container py-4 py-md-6 px-3">    
@@ -80,7 +78,7 @@
         {% endif %}
 
 
-        <!-- Delete post -- only visible to the post owner -->
+        <!-- Delete post visible to owner -->
         
       {% if user.is_authenticated and user == post.user %}
       <div class="p-3 text-center">
