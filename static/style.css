@@ -47,7 +47,7 @@ html {
   background-color: var(--color-bg);
   padding-right: 0.85rem;
   padding-left: 0.85rem;
-  min-height: 50px;
+  min-height: 5vh; /* Default height */
 }
 
 .navbar-brand {
@@ -59,11 +59,6 @@ html {
 .navbar-nav {
   font-family: var(--font-sans);
   font-size: 1.25rem; /* ~20px, more responsive */
-}
-
-.navbar-nav .nav-link {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 /* Body styles */
@@ -116,9 +111,9 @@ img, video {
 /* Carousel styles -- see media queries for device height adjustments */
 
 .hero-img {
-  height: 40vh;
   object-fit: cover;
   width: 100%;
+  height: 50vh;
 }
 
 .hero-signup-img {
@@ -342,11 +337,8 @@ img, video {
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
   /* XS styles */
-  .hero-img {
-    height: 32vh;
-  }
   .navbar {
-    min-height: 5vh;
+    min-height: 7vh;
   }
   .navbar-nav {
     font-size: 1rem; /* ~16px for better fit on small screens */
@@ -367,12 +359,11 @@ img, video {
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
   /* SM styles */
-  .hero-img {
-    height: 34vh;
+
+  #intro p {
+    font-size: 1rem;
   }
-  .navbar {
-    min-height: 5vh;
-  }
+  
   #how-to h3,
   #how-to p {
   text-align: center;
@@ -380,14 +371,17 @@ img, video {
 }
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 768px) and (max-width: 991px) {
   /* MD styles */
+
   .hero-img {
-    height: 36vh;
+    max-height: 40vh;
   }
-  .navbar {
-    min-height: 7vh;
+
+  #intro p {
+    font-size: 1rem;
   }
+
   .mix-col .card { 
     min-height: 260px; 
   }
@@ -399,46 +393,45 @@ img, video {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  /* LG: enforce a 3-column grid for Discover so layout doesn't collapse to 2 columns */
   
+  .hero-img {
+    max-height: 30vh;
+  }
+
   #discover .row {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+    gap: 0.5rem;
     align-items: start;
   }
 
   #discover .card {
     height: 340px;
-  }
-
-  /* allow grid children to shrink and avoid overflowing due to long words or media
-  #discover .mix-col {
-    width: auto;
-    min-width: 0;
-  } */
-
-  /* Make card fill column height for consistent cards 
-  #discover .mix-col .card {
-    height: 100%;
     box-sizing: border-box;
-    overflow: hidden;
-  } */
-  
-  .hero-img {
-    height: 38vh;
-  }
-
-  .navbar {
-    min-height: 8vh;
+    width: auto;
   }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   /* XL styles (optional tweaks for very large screens) */
+
   .hero-img {
-    height: 42vh;
+    max-height: 30vh;
   }
+
+  #discover .row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    align-items: start;
+  }
+
+  #discover .card {
+    height: 340px;
+    box-sizing: border-box;
+    width: auto;
+  }
+
 }
 
