@@ -27,12 +27,12 @@
 
   <!-- Intro container under the hero -->
   <div id="intro" class="container mt-4">
-    <div class="row align-items-center">
-      <div class="col-lg-8 col-md-8">
-        <h1 class="display-4">Find your next favorite mix</h1>
-        <p class="lead">Browse, listen, and share DJ mixes from across the community.</p>
+    <div class="row d-flex align-items-center justify-content-between flex-lg-row flex-column">
+      <div class="col-lg-8 col-md-8 text-center text-lg-start">
+        <h1 class="display-4 mb-0">Find your next favourite mix</h1>
+        <p class="lead mb-0">Browse, listen, and share DJ mixes from across the community.</p>
       </div>
-      <div class="col-lg-4 col-md-4">
+      <div class="col-lg-4 col-md-4 text-center mt-3 mt-lg-0 align-self-center">
         <a href="{% url 'upload_audio' %}" class="btn btn-lg btn-dark">Upload a mix</a>
       </div>
     </div>
@@ -76,7 +76,7 @@
         {% endif %}
 
 
-        <!-- DELETE BUTTON: only visible to the post owner -->
+        <!-- Delete post -- only visible to the post owner -->
         
       {% if user.is_authenticated and user == post.user %}
       <div class="p-3 text-center">
