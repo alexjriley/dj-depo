@@ -30,7 +30,7 @@ def signup(request):
 class AudioPostForm(forms.ModelForm):
     class Meta:
         model = AudioPost
-        fields = ['title', 'audio_file']
+        fields = ['title', 'description', 'audio_file']
     """
     Form for creating and updating AudioPost instances.
     """
@@ -76,3 +76,22 @@ def delete_post(request, pk):
         return redirect('home')  # change 'home' to your desired redirect name
 
     return render(request, 'mixes/post_confirm_delete.html', {'post': post})
+
+@login_required
+def edit_audio_post(request, pk):
+    post = get_object_or_404(AudioPost, pk=pk, user=request.user)  # Ensure only the user's post is fetched
+
+    form = AudioPostForm(request.POST or None, request.FILES or None, instance=post)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Your mix was updated successfully!')
+        return redirect('home')  # Ensure redirect after successful form submission
+
+    # Debugging output
+    print("Post object (ID):", post.id)
+    print("Post object (Title):", post.title)
+    print("Post object (Description):", post.description)
+    print("Form initial data:", form.initial)
+
+    return render(request, 'mixes/edit_audio_post.html', {'form': form, 'post': post})

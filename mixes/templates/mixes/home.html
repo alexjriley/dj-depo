@@ -53,6 +53,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ post.title }}</h5>
           <p class="card-text text-muted">by {{ post.user.username }}</p>
+          <p class="card-text">{{ post.description }}</p>
         </div>
         {% if post.audio_file and post.audio_file.url %}
         <div class="p-3">
@@ -77,43 +78,18 @@
         </div>
         {% endif %}
 
-
-        <!-- Delete post visible to owner -->
-        
-      {% if user.is_authenticated and user == post.user %}
-      <div class="p-3 text-center">
-        <!-- Delete Button triggers modal -->
-         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ post.id }}"> <i class="bi bi-trash"></i> Delete
-        </button>
-      </div>
-      {% endif %}
-
-      <!-- Bootstrap Modal -->
-       <div class="modal fade" id="deleteModal-{{ post.id }}" tabindex="-1" aria-labelledby="deleteModalLabel-{{ post.id }}" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-      
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel-{{ post.id }}">Confirm Delete</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-        Are you sure you want to delete <strong>{{ post.title }}</strong>?
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <form method="POST" action="{% url 'post-delete' post.id %}" class="d-inline">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Yes, Delete</button>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-
+        {% if user.is_authenticated and user == post.user %}
+        <div class="p-3 text-center d-flex justify-content-center align-items-center gap-2">
+          <form method="POST" action="{% url 'edit_audio_post' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+          </form>
+          <form method="POST" action="{% url 'post-delete' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </div>
+        {% endif %}
       </div>
     </div>
     {% endfor %}
