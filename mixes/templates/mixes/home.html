@@ -3,7 +3,8 @@
 
 {% block hero %}
   <!-- Full width hero carousel -->
-  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+   <section class="carousel-section py-3 py-md-5">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="{% static 'images/pexels-gigxels-7709006.jpg' %}" class="d-block w-100 hero-img" alt="A turntable DJ playing a record">
@@ -24,9 +25,11 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  </section>
 
   <!-- Intro container under the hero -->
-  <div id="intro" class="container mt-4">
+  <section class="container py-4 px-3">    
+    <div id="intro">
     <div class="row d-flex align-items-center justify-content-between flex-lg-row flex-column">
       <div class="col-lg-8 col-md-8 text-center text-lg-start">
         <h1 class="display-4 mb-0">Find your next favourite mix</h1>
@@ -37,14 +40,15 @@
       </div>
     </div>
   </div>
-{% endblock %}
+  {% endblock %}
+  </section>
+
 
 {% block content %}
-<section id="discover" class="container mt-4">
+<section id="discover" class="container py-4 py-md-5 px-3">
   <h2 class="display-5 text-center">Discover</h2>
-
   {% if posts %}
-  <div class="row g-4">
+  <div class="row g-3 g-md-4">
     {% for post in posts %}
     <div class="col-12 mix-col">
       <div class="card h-100">
@@ -137,23 +141,24 @@
 </section>
 
 <!-- Uploading instructions section -->
-  <section id="how-to">
-    <h2 class="display-6">Share yours</h2>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-12">
-      <p class="lead">
-        To use the platform:
-      </p>
-      <p class="lead"> <i class="fa-solid fa-user-plus"></i> Create an account
-      <br> <i class="fa-solid fa-cloud-arrow-up"></i> Upload your audio file
-      <br> <i class="fa-solid fa-globe"></i> Give it a name + share </p>
+  <section id="how-to" class="container py-4 py-md-5 px-3">
+  <h2 class="display-6 text-center mb-4">Share yours</h2>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="p-3 border rounded bg-light text-center">
+        <p class="lead mb-3">To use the platform:</p>
+        <ul class="list-unstyled lead">
+          <li class="mb-2"><i class="fa-solid fa-user-plus me-2"></i>Create an account</li>
+          <li class="mb-2"><i class="fa-solid fa-cloud-arrow-up me-2"></i>Upload your audio file</li>
+          <li><i class="fa-solid fa-globe me-2"></i>Give it a name + share</li>
+        </ul>
       </div>
-    <div class="col-lg-6 mt-4 container-fluid">
-      <img src="/static/images/pexels-aleksandr-neplokhov-486399-1238941.jpg" alt="" class="card" width="600" height="auto">
     </div>
+    <div class="col-12 col-md-6 col-lg-6 mt-4 mt-md-0">
+      <img src="/static/images/pexels-aleksandr-neplokhov-486399-1238941.jpg" alt="" class="img-fluid rounded shadow">
     </div>
-  </section>
+  </div>
+</section>
 
 {% endblock %}
 {% block extra_scripts %}
