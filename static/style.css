@@ -47,7 +47,7 @@ html {
   background-color: var(--color-bg);
   padding-right: 0.85rem;
   padding-left: 0.85rem;
-  min-height: 5vh; /* Default height */
+  min-height: 7vh; /* Default height */
 }
 
 .navbar-brand {
@@ -338,7 +338,7 @@ img, video {
 @media (max-width: 575.98px) {
   /* XS styles */
   .navbar {
-    min-height: 7vh;
+    min-height: 9vh;
   }
   .navbar-nav {
     font-size: 1rem; /* ~16px for better fit on small screens */
