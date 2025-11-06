@@ -74,6 +74,44 @@
           <div class="mix-time" id="mix-time-{{ post.id }}">&nbsp;0:00 / 0:00</div>
         </div>
         {% endif %}
+
+
+        <!-- DELETE BUTTON: only visible to the post owner -->
+        
+      {% if user.is_authenticated and user == post.user %}
+      <div class="p-3 text-center">
+        <!-- Delete Button triggers modal -->
+         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ post.id }}"> <i class="bi bi-trash"></i> Delete
+        </button>
+      </div>
+      {% endif %}
+
+      <!-- Bootstrap Modal -->
+       <div class="modal fade" id="deleteModal-{{ post.id }}" tabindex="-1" aria-labelledby="deleteModalLabel-{{ post.id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel-{{ post.id }}">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        Are you sure you want to delete <strong>{{ post.title }}</strong>?
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form method="POST" action="{% url 'post-delete' post.id %}" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
     {% endfor %}
