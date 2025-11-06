@@ -3,7 +3,6 @@
 
 {% block hero %}
   <!-- Full width hero carousel -->
-   <section class="carousel-section">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -25,14 +24,13 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  </section>
 
   <!-- Intro container under the hero -->
   <section class="container py-4 py-md-6 px-3">    
     <div id="intro">
     <div class="row d-flex align-items-center justify-content-between flex-lg-row flex-column">
       <div class="col-lg-8 col-md-8 text-center text-lg-start">
-        <h1 class="display-4 mb-0">Find your next favourite mix</h1>
+        <h1 class="display-4 mt-3 mb-0">Find your next favourite mix</h1>
         <p class="lead mb-0">Browse, listen, and share DJ mixes from across the community.</p>
       </div>
       <div class="col-lg-4 col-md-4 text-center mt-3 mt-lg-0 align-self-center">
@@ -55,6 +53,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ post.title }}</h5>
           <p class="card-text text-muted">by {{ post.user.username }}</p>
+          <p class="card-text">{{ post.description }}</p>
         </div>
         {% if post.audio_file and post.audio_file.url %}
         <div class="p-3">
@@ -79,43 +78,18 @@
         </div>
         {% endif %}
 
-
-        <!-- Delete post -- only visible to the post owner -->
-        
-      {% if user.is_authenticated and user == post.user %}
-      <div class="p-3 text-center">
-        <!-- Delete Button triggers modal -->
-         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ post.id }}"> <i class="bi bi-trash"></i> Delete
-        </button>
-      </div>
-      {% endif %}
-
-      <!-- Bootstrap Modal -->
-       <div class="modal fade" id="deleteModal-{{ post.id }}" tabindex="-1" aria-labelledby="deleteModalLabel-{{ post.id }}" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-      
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel-{{ post.id }}">Confirm Delete</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-        Are you sure you want to delete <strong>{{ post.title }}</strong>?
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <form method="POST" action="{% url 'post-delete' post.id %}" class="d-inline">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Yes, Delete</button>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-
+        {% if user.is_authenticated and user == post.user %}
+        <div class="p-3 text-center d-flex justify-content-center align-items-center gap-2">
+          <form method="POST" action="{% url 'edit_audio_post' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+          </form>
+          <form method="POST" action="{% url 'post-delete' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </div>
+        {% endif %}
       </div>
     </div>
     {% endfor %}

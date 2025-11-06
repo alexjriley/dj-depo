@@ -7,4 +7,5 @@ urlpatterns = [
     path("upload/", upload_audio, name="upload_audio"),
     path("signup/", signup, name="signup"),
     path('post/<int:pk>/delete/', views.delete_post, name='post-delete'),
+    path('post/<int:pk>/edit/', views.edit_audio_post, name='edit_audio_post'),
 ]
