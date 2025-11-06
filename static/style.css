@@ -2,6 +2,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* Global font and colour control */
+
 :root {
   /* Fonts */
   --font-sans: 'Noto Sans', sans-serif;
@@ -23,7 +25,7 @@
   --wave-progress: var(--color-primary);
 
   /* Layout */
-  --max-content-width: 1600px;
+  --max-content-width: 1400px;
 
   /* Base font size: fluid between 14px and 18px */
   --fs-base: clamp(0.875rem, 0.85rem + 0.3vw, 1.125rem); /* ~14px - 18px */
@@ -39,39 +41,8 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: var(--font-sans);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+/* Navbar styles */
 
-}
-
-/* main {
-  margin: auto;
-} */
-
-section {
-  padding-bottom: 40px;
-}
-
-/* Headings */
-h1, h3 {
-  font-family: var(--font-heading);
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-h2, h4, h5, h6 {
-  font-family: var(--font-heading);
-  padding-top: 4px;
-  padding-bottom: 4px;
-  text-align: center;
-}
-
-/* Slightly upscale navbar: more vertical space for branding and nav links */
 .navbar {
   background-color: var(--color-bg);
   padding-right: 0.85rem;
@@ -95,7 +66,28 @@ h2, h4, h5, h6 {
   padding-bottom: 0.5rem;
 }
 
-/* Responsive type scale using clamp() for better legibility across devices */
+/* Body styles */
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+}
+
+h1, h3 {
+  font-family: var(--font-heading);
+  padding-bottom: 10px;
+}
+
+h2, h4, h5, h6 {
+  font-family: var(--font-heading);
+  padding-bottom: 10px;
+  text-align: center;
+}
 
 html { font-size: var(--fs-base); }
 
@@ -104,15 +96,25 @@ h1 {
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: -0.03em;
-  margin-bottom: 0.6rem;
 }
 h2 { font-size: var(--fs-scale-4); }
 h3 { font-size: var(--fs-scale-3); }
 h4 { font-size: var(--fs-scale-2); }
 h5, h6 { font-size: var(--fs-scale-1); }
 
+body .btn:hover {
+  background-color: var(--color-accent);
+}
 
-/* Hero carousel image */
+/* Ensure images and media can't force horizontal overflow */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Carousel styles -- see media queries for device height adjustments */
+
 .hero-img {
   height: 40vh;
   object-fit: cover;
@@ -127,29 +129,18 @@ h5, h6 { font-size: var(--fs-scale-1); }
   display: block;
 }
 
-/* Make sure carousel controls are vertically centered */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-size: 2rem 2rem;
 }
 
-/* Ensure images and media can't force horizontal overflow */
-img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-#intro {
-  padding: 60px;
-}
+/* Discover -- Waveform and player styles */
 
 #discover .mix-col .card .btn {
   max-height: 300px;
   /* background: url(images/cover-mix-discover.jpeg) no-repeat;*/
 }
 
-/* Waveform and player styles */
 .waveform {
   display: block;
   width: 100%;
@@ -240,32 +231,6 @@ img, video {
   flex: 0 0 auto;
 }
 
-/* Upload audio custom styling */
-
-.upload-audio {
-  padding-top: 4px;
-}
-
-/* Upload audio - user only */
-
-.upload-audio h2 {
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-
-/* Footer */
-
-#footer {
-  margin-top: auto;
-  background-color: var(--footer-bg);
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-#footer p {
-  font-size: 1.2rem;
-}
-
 /* Reusable form card */
 
 .form-card {
@@ -342,6 +307,32 @@ img, video {
 /* If Bootstrap specificity still wins, increase specificity for the override */
 /* (Removed .container #discover .mix-col .card as #discover .mix-col .card is sufficient) */
 
+/* Upload audio custom styling */
+
+.upload-audio {
+  padding-top: 4px;
+}
+
+/* Upload audio - user only */
+
+.upload-audio h2 {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* Footer */
+
+#footer {
+  margin-top: 20px;
+  background-color: var(--footer-bg);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#footer p {
+  font-size: 1.2rem;
+}
+
 /* ----------------------------
    Standard breakpoint media queries
    XS: <576px, SM: 576-767.98px, MD: 768-991.98px,
@@ -361,7 +352,8 @@ img, video {
     font-size: 1rem; /* ~16px for better fit on small screens */
   }
   .waveform { 
-    height: 96px; padding: 0.25rem; 
+    max-width: 50%;
+    width: auto; 
   }
   .playPause { 
     min-width: 40px; height: 40px; 

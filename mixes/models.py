@@ -20,3 +20,4 @@ class AudioPost(models.Model):
 
     class Meta:
         db_table = 'hello_world_audiopost'
+        app_label = 'mixes'

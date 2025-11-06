@@ -5,9 +5,12 @@ from .models import AudioPost
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
+from .models import AudioPost
 
 # Create your views here.
-
 
 def signup(request):
     """
@@ -59,3 +62,17 @@ def upload_audio(request):
 def home_page_view(request):
     posts = AudioPost.objects.order_by('-created_at')
     return render(request, 'mixes/home.html', {'posts': posts})
+
+@login_required
+def delete_post(request, pk):
+    post = get_object_or_404(AudioPost, pk=pk)
+
+    # Only allow the user who created the post to delete it
+    if post.user != request.user:
+        return HttpResponseForbidden("You are not allowed to delete this post.")
+
+    if request.method == "POST":
+        post.delete()
+        return redirect('home')  # change 'home' to your desired redirect name
+
+    return render(request, 'mixes/post_confirm_delete.html', {'post': post})
