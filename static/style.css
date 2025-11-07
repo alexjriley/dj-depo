@@ -13,12 +13,14 @@
   --color-primary: hsl(30, 33%, 5%); /* Smoky Black */
   --color-accent: #ff6b6b;  /* accent / highlight */
   --color-bg: #f2f0ef;
-  --footer-bg: #e0e0e0;
+  --footer-bg: #212121;
   --color-surface: #f8fafc;
   --color-text: #111827;
   --color-muted: #6b7280;
   --color-success: #10b981;
   --color-danger: #ef4444;
+  --link-hover-color: #0c47a1;
+  --link-color: #ffffff;
 
   /* Waveform colors (used by WaveSurfer) */
   --wave-fill: var(--color-text);
@@ -36,6 +38,7 @@
   --fs-scale-5: clamp(2.5rem, 2.3rem + 3vw, 4rem); /* h1 */
 
 }
+
 
 html {
   scroll-behavior: smooth;
@@ -99,6 +102,16 @@ h5, h6 { font-size: var(--fs-scale-1); }
 
 body .btn:hover {
   background-color: var(--color-accent);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 /* Ensure images and media can't force horizontal overflow */
@@ -322,11 +335,14 @@ img, video {
   background-color: var(--footer-bg);
   padding-top: 20px;
   padding-bottom: 20px;
+  color: #ffffff; /* Stronger contrast for footer text */
 }
 
 #footer p {
   font-size: 1.2rem;
 }
+
+
 
 /* ----------------------------
    Standard breakpoint media queries
