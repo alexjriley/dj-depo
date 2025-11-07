@@ -73,6 +73,7 @@ def delete_post(request, pk):
 
     if request.method == "POST":
         post.delete()
+        messages.success(request, 'Your mix was deleted successfully!')
         return redirect('home')  # change 'home' to your desired redirect name
 
     return render(request, 'mixes/post_confirm_delete.html', {'post': post})
