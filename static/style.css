@@ -13,12 +13,14 @@
   --color-primary: hsl(30, 33%, 5%); /* Smoky Black */
   --color-accent: #ff6b6b;  /* accent / highlight */
   --color-bg: #f2f0ef;
-  --footer-bg: #e0e0e0;
+  --footer-bg: #212121;
   --color-surface: #f8fafc;
   --color-text: #111827;
   --color-muted: #6b7280;
   --color-success: #10b981;
   --color-danger: #ef4444;
+  --link-hover-color: #0c47a1;
+  --link-color: #ffffff;
 
   /* Waveform colors (used by WaveSurfer) */
   --wave-fill: var(--color-text);
@@ -36,6 +38,7 @@
   --fs-scale-5: clamp(2.5rem, 2.3rem + 3vw, 4rem); /* h1 */
 
 }
+
 
 html {
   scroll-behavior: smooth;
@@ -73,6 +76,10 @@ body {
 
 }
 
+main {
+  flex: 1;
+}
+
 h1, h3 {
   font-family: var(--font-heading);
   padding-bottom: 10px;
@@ -99,6 +106,16 @@ h5, h6 { font-size: var(--fs-scale-1); }
 
 body .btn:hover {
   background-color: var(--color-accent);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 /* Ensure images and media can't force horizontal overflow */
@@ -255,6 +272,11 @@ img, video {
   text-align: left;
 }
 
+/* Add spacing below the audio upload field and buttons */
+.upload-audio .form-group {
+  margin-bottom: 1.5rem; /* Adds spacing below each form group */
+}
+
 /* Form controls inside .form-card: make them full width and evenly spaced */
 .form-card input,
 .form-card textarea,
@@ -292,6 +314,14 @@ img, video {
   font-weight: 600;
 }
 
+.form-actions {
+  gap: 1rem; /* Add spacing between horizontally aligned buttons */
+}
+
+.form-group button {
+  margin-top: 1rem; /* Add spacing above the delete button */
+}
+
 /* Small tweak for error message inside the card */
 .form-card .error {
   color: var(--color-danger);
@@ -322,11 +352,14 @@ img, video {
   background-color: var(--footer-bg);
   padding-top: 20px;
   padding-bottom: 20px;
+  color: #ffffff; /* Stronger contrast for footer text */
 }
 
 #footer p {
   font-size: 1.2rem;
 }
+
+
 
 /* ----------------------------
    Standard breakpoint media queries

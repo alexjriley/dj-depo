@@ -6,13 +6,13 @@
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{% static 'images/pexels-gigxels-7709006.jpg' %}" class="d-block w-100 hero-img" alt="A turntable DJ playing a record">
+        <img src="{% static 'images/pexels-gigxels-7709006.webp' %}" class="d-block w-100 hero-img" alt="A turntable DJ playing a record">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'images/pexels-kei-scampa-1201427-16113965.jpg' %}" class="d-block w-100 hero-img" alt="A rave in an industrial warehouse with a balcony">
+        <img src="{% static 'images/pexels-kei-scampa-1201427-16113965.webp' %}" class="d-block w-100 hero-img" alt="A rave in an industrial warehouse with a balcony">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'images/pexels-odin-reyna-383507-8673525.jpg' %}" class="d-block w-100 hero-img" alt="A woman DJing at a festival">
+        <img src="{% static 'images/pexels-odin-reyna-383507-8673525.webp' %}" class="d-block w-100 hero-img" alt="A woman DJing at a festival">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
@@ -51,7 +51,7 @@
     <div class="col-12 mix-col">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title">{{ post.title }}</h5>
+          <h4 class="card-title">{{ post.title }}</h4>
           <p class="card-text text-muted">by {{ post.user.username }}</p>
           <p class="card-text">{{ post.description }}</p>
         </div>
@@ -84,8 +84,7 @@
             {% csrf_token %}
             <button type="submit" class="btn btn-primary btn-sm">Edit</button>
           </form>
-          <form method="POST" action="{% url 'post-delete' post.id %}">
-            {% csrf_token %}
+          <form method="GET" action="{% url 'edit_audio_post' post.id %}">
             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
           </form>
         </div>
@@ -129,7 +128,7 @@
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-6 mt-4 mt-md-0">
-      <img src="/static/images/pexels-aleksandr-neplokhov-486399-1238941.jpg" alt="" class="img-fluid rounded shadow">
+      <img src="/static/images/pexels-aleksandr-neplokhov-486399-1238941.webp" alt="DJ equipment and vinyl records on a table" class="img-fluid rounded shadow h-100 w-lg-auto">
     </div>
   </div>
 </section>
