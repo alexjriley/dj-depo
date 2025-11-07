@@ -31,6 +31,13 @@ class AudioPostForm(forms.ModelForm):
     class Meta:
         model = AudioPost
         fields = ['title', 'description', 'audio_file']
+
+    def clean_audio_file(self):
+        audio_file = self.cleaned_data.get('audio_file')
+        if audio_file:
+            if not audio_file.name.endswith('.mp3'):
+                raise forms.ValidationError('Only MP3 files are allowed.')
+        return audio_file
     """
     Form for creating and updating AudioPost instances.
     """
