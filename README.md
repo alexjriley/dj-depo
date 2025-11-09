@@ -68,7 +68,7 @@ I then connected a Postgre database to make the application functional and enabl
 
 <sub>Mix model</sub><br> ![audio-post-model](https://github.com/user-attachments/assets/b0aae2f4-7793-4e59-90e0-f829426f2680)
 
-The main componenet of the DJ Depo app is this AudioPost model, with custom elements to enhance UX.
+The main component of the DJ Depo app is this AudioPost model, with custom elements to enhance UX.
 
 Enables users to:
 
@@ -76,7 +76,7 @@ Enables users to:
 - Store a title, description and an audio file.
 - Integrates with Cloudinary for storage in the cloud.
 - Bypasses Cloudinary during tests and stores files locally.
-- Records timestamp for uploads. 
+- Records timestamp for uploads.
 
 #### Database patch
 
@@ -85,6 +85,34 @@ The AudioPost model in /mix/models.py explicitly sets the database table name to
 This is because hello_world app was the original location of the model, and it was later moved to mixes. Despite the move, the database table name remains `hello_world_audiopost` to maintain compatibility with existing data.
 
 See documentation in mixes/models.py for further clarification.
+
+
+## Testing
+
+### Accessibility
+
+Lighthouse reports (Google Dev Tools)
+
+Scores
+
+Markup Validation Service HTML (W3C)
+
+| HTML  | Validator pass/fail |
+| ------------- | ------------- |
+| `templates>base.html`  | PASS  |
+| `templates>registration>login.html` | PASS  |
+| `templates>registration>signup.html` | PASS  |
+| `templates>registration>signup.html` | PASS  |
+| `mixes>templates>mixes>signup.html>edit_audio_post.html` | PASS  |
+| `mixes>templates>mixes>signup.html>home.html` | PASS  |
+| `mixes>templates>mixes>signup.html>post_confirm_delete.html` | PASS  |
+| `mixes>templates>mixes>signup.html>upload_audio.html` | PASS  |
+
+CSS Validation Service (W3C)
+
+| CSS  | Validator pass/fail |
+| ------------- | ------------- |
+| `static>style.css`  | PASS  |
 
 ## Deploying the project locally
 
