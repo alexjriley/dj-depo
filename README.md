@@ -1,6 +1,6 @@
 # Project overview
 
-<img width="1185" height="1050" alt="Screenshot 2025-11-09 at 15 54 19" src="https://github.com/user-attachments/assets/a412426f-e1c7-466f-b4de-b4de8c256b01" />
+<img width="1185" height="1050" alt="DJ Database homepage" src="https://github.com/user-attachments/assets/a412426f-e1c7-466f-b4de-b4de8c256b01" />
 
 DJ Depo is a full-stack web application built for for DJs and mix enthusiasts to to discover and upload their own DJ mixes. It facilitates community-orientated sharing of fresh music mixes curated by DJs. 
 
@@ -28,7 +28,7 @@ To speed up development time, I asked Chat GPT to generate a set of user stories
 
 ### Project board
 
-<sub>Github project board (complete)</sub><br><img width="1196" height="840" alt="Screenshot 2025-11-09 at 15 39 23" src="https://github.com/user-attachments/assets/46842883-85a3-41a0-8d75-eafda01f9bf8" />
+<sub>Github project board (complete)</sub><br><img width="1196" height="840" alt="Github project board" src="https://github.com/user-attachments/assets/46842883-85a3-41a0-8d75-eafda01f9bf8" />
 
 ### Agile methodology
 
@@ -42,7 +42,7 @@ The sprints ran for one week and focused on key areas of development
 - Week 2 sprint: Javascript model and custom templates (HTML). 
 - Week 3 sprint: Frontend design (CSS) and testing.
 
-<sub>Trello sprint board (complete)</sub><br><img width="726" height="858" alt="Screenshot 2025-11-09 at 15 37 58" src="https://github.com/user-attachments/assets/5c6d2bcd-7815-4757-a3f4-1e87f5a012d5" />
+<sub>Trello sprint board (complete)</sub><br><img width="726" height="858" alt="Trello project board" src="https://github.com/user-attachments/assets/5c6d2bcd-7815-4757-a3f4-1e87f5a012d5" />
 
 ## Design
 
@@ -50,7 +50,7 @@ The sprints ran for one week and focused on key areas of development
 
 For this project, I used Figma to create a wireframe and interactive front-end mockup of the site.  In the design of my homepage, I have largely stuck to the original designs as well as making improvements to the overall style and layout.
 
-<sub>Wireframe</sub><br> ![website-app-wireframe](https://github.com/user-attachments/assets/b3e2af5c-6378-469b-9b79-db1a8bb10c94)
+<sub>Wireframe</sub><br> 
 
 <sub>Figma mock-up</sub><br> ![dj-depo-figma](https://github.com/user-attachments/assets/817e1163-7780-40e2-8b45-9a19a785f6e7) <a href="https://www.figma.com/proto/6l3lN5EkOBqiOt3E1EZqwY/dj.depo?node-id=1-3908&scaling=min-zoom&content-scaling=fixed&t=R6DRqAfJW9GuPCEj-1"> Figma link </a>
 
@@ -58,7 +58,7 @@ For this project, I used Figma to create a wireframe and interactive front-end m
 
 ### Database Development
 
-<sub>Admin panel</sub><br> ![django-admin-panel](https://github.com/user-attachments/assets/d34b482d-22ef-4a3d-a8a0-c29f812a76de)
+<sub>Admin panel</sub><br> ![admin-panel](https://github.com/user-attachments/assets/225200c3-9b66-4f9d-a827-ff279716279d)
 
 After creating a remote repository, I set up the Django environment ready to use the Model View Template Framework.
 
