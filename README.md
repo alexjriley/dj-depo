@@ -8,6 +8,27 @@
 
 A full-stack Django web app for DJs to share and discover new mixes.
 
+## Contents
+
+- [Tech Stack](#tech-stack)  
+- [Project Overview](#project-overview)  
+- [Planning](#planning)  
+  - [User Stories](#user-stories)  
+  - [Project Board](#project-board)  
+  - [Agile Methodology](#agile-methodology)  
+- [Design](#design)  
+  - [Concept and Wireframe](#concept-and-wireframe)  
+- [Development](#development)  
+  - [Database Development](#database-development)  
+  - [Custom Model](#custom-model)  
+- [Testing](#testing)  
+  - [Accessibility](#accessibility)  
+  - [Responsive Screen Tests](#responsive-screen-tests)  
+- [Use of AI Tools](#use-of-ai-tools)  
+- [Getting Started](#getting-started)  
+  - [Deploying the Project Locally](#deploying-the-project-locally)  
+- [Future Development](#future-development)
+
 ## Tech stack
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
