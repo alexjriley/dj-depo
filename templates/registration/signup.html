@@ -15,7 +15,7 @@
       {% csrf_token %}
       {{ form.as_p }}
       <div class="form-actions">
-        <button type="submit" class="btn btn-dark w-100">Sign Up</button>
+        <button type="submit" class="btn btn-dark w-100" aria-label="Sign Up">Sign Up</button>
       </div>
     </form>
     <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
