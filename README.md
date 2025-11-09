@@ -1,6 +1,6 @@
 # Project overview
 
-[DJ Depo banner image]
+<img width="1185" height="1050" alt="Screenshot 2025-11-09 at 15 54 19" src="https://github.com/user-attachments/assets/a412426f-e1c7-466f-b4de-b4de8c256b01" />
 
 DJ Depo is a full-stack web application built for for DJs and mix enthusiasts to to discover and upload their own DJ mixes. It facilitates community-orientated sharing of fresh music mixes curated by DJs. 
 
@@ -24,31 +24,71 @@ To speed up development time, I asked Chat GPT to generate a set of user stories
 4. Discover Mixes: As a site visitor, I want to browse a list of the most recent mixes so that I can find new music and discover different DJs.
 5. Play Mixes: As a visitor, I want to listen to a mix directly from the website using an audio player so that I don’t need to download files to hear them.
 6. Responsive Design: As a user, I want to navigate and play mixes easily on my phone, tablet or large screen devices.
-7. Mix Tags or Genres: 
+7. Mix Tags or Genres:
 
 ### Project board
 
-[Screenshot of project boards on Github/Trello]
+<sub>Github project board (complete)</sub><br><img width="1196" height="840" alt="Screenshot 2025-11-09 at 15 39 23" src="https://github.com/user-attachments/assets/46842883-85a3-41a0-8d75-eafda01f9bf8" />
 
+### Agile methodology
 
+As a development team of one, working agile was essential. I used Github Projects to track user story requirements and for sprints I used a separate Trello board.
+
+This ensured I was able to meet the criteria for site functionality and keep a check on time constraints for the project as a whole.
+
+The sprints ran for one week and focused on key areas of development
+
+- Week 1 sprint: Backend setup and authentication (Django).
+- Week 2 sprint: Javascript model and custom templates (HTML). 
+- Week 3 sprint: Frontend design (CSS) and testing.
+
+<sub>Trello sprint board (complete)</sub><br><img width="726" height="858" alt="Screenshot 2025-11-09 at 15 37 58" src="https://github.com/user-attachments/assets/5c6d2bcd-7815-4757-a3f4-1e87f5a012d5" />
+
+## Design
 
 ### Concept and wireframe
 
-[Screenshot of wireframe using Figma]
+For this project, I used Figma to create a wireframe and interactive front-end mockup of the site.  In the design of my homepage, I have largely stuck to the original designs as well as making improvements to the overall style and layout.
 
-For this project, I used Figma to create a front-end mockup of the site. 
+<sub>Wireframe</sub><br> ![website-app-wireframe](https://github.com/user-attachments/assets/b3e2af5c-6378-469b-9b79-db1a8bb10c94)
 
-In the design of my homepage, I have largely stuck to the original designs as well as making improvements to the overall style and layout.
+<sub>Figma mock-up</sub><br> ![dj-depo-figma](https://github.com/user-attachments/assets/817e1163-7780-40e2-8b45-9a19a785f6e7) <a href="https://www.figma.com/proto/6l3lN5EkOBqiOt3E1EZqwY/dj.depo?node-id=1-3908&scaling=min-zoom&content-scaling=fixed&t=R6DRqAfJW9GuPCEj-1"> Figma link </a>
 
-It was important to limit too much ideation with this project, so that development of the front-end did not exhaust the time constraints.
+## Development
 
+### Database Development
 
+<sub>Admin panel</sub><br> ![django-admin-panel](https://github.com/user-attachments/assets/d34b482d-22ef-4a3d-a8a0-c29f812a76de)
 
+After creating a remote repository, I set up the Django environment ready to use the Model View Template Framework.
 
+I then connected a Postgre database to make the application functional and enable the creation of an admin panel, users and begin to develop CRUD functionality.
 
-### 
+### Custom Model
 
-## Deployment notes: Cloudinary
+<sub>Mix model</sub><br> ![audio-post-model](https://github.com/user-attachments/assets/b0aae2f4-7793-4e59-90e0-f829426f2680)
+
+The main componenet of the DJ Depo app is this AudioPost model, with custom elements to enhance UX.
+
+Enables users to:
+
+- Upload audio posts associated with their accounts.
+- Store a title, description and an audio file.
+- Integrates with Cloudinary for storage in the cloud.
+- Bypasses Cloudinary during tests and stores files locally.
+- Records timestamp for uploads. 
+
+#### Database patch
+
+The AudioPost model in /mix/models.py explicitly sets the database table name to hello_world_audiopost. 
+
+This is because hello_world app was the original location of the model, and it was later moved to mixes. Despite the move, the database table name remains `hello_world_audiopost` to maintain compatibility with existing data.
+
+See documentation in mixes/models.py for further clarification.
+
+## Deploying the project locally
+
+### Cloudinary
 
 This project uses Cloudinary for media storage in production. Before deploying, make sure one of the following is set in the environment:
 
