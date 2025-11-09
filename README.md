@@ -91,11 +91,13 @@ See documentation in mixes/models.py for further clarification.
 
 ### Accessibility
 
-Lighthouse reports (Google Dev Tools)
+Lighthouse report score (Google Dev Tools)
 
-Scores
+| Performance  | Accessibility | Best Practices |
+| ------------- | ------------- | ------------- |
+| 73  | 100  | 100  |
 
-
+![lighthouse-score](https://github.com/user-attachments/assets/0b002b72-ddb3-42b0-b4d2-34f2bcd33ed1)
 
 Markup Validation Service HTML (W3C)
 
