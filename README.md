@@ -140,6 +140,39 @@ CSS Validation Service (W3C)
 | Medium device (iPad Pro 11) | ![ipad-pro-11](https://github.com/user-attachments/assets/d59f14f9-6cb1-42a2-a58d-c285d3d8f8e7)|
 | Large device (Macbook Pro 13) | ![lg-device-macbookair13](https://github.com/user-attachments/assets/ea9b45ba-6db2-4f8e-83cc-98850db395d7) |
 
+
+## Use of AI tools
+
+### Strategic use
+
+In this project, I used Microsoft Co-Pilot's AI agent integration in VS Code to provide support on areas such as:
+
+- Troubleshooting errors (500, 400) and suggesting solutions
+- Assisting in customising Django model and Javascript waveform
+- Reviewing the project for accessibility and code quality
+
+### Debugging
+
+On more than one occassion, I used AI to support with debugging issues. This avoided using up time on blockers and I used each opportunity to learn from the assistant so that I could approach the problem myself in the future.
+
+One example of this was customisation of the Wavesurfer.js plugin. This was a crucial component of the front-end UX for the application, however the out of the box version didn't match the clean front-end UX of the site.
+
+I used the Copilot agent to understand why the progress bar was obstructing the waveform. Although the solution (using a drop-shadow as opposed to a solid shape) was short of perfect, this was an example where AI assistance enabled the project to be elevated beyond my Javascript abilities.
+
+### Optmising code
+
+Another area where AI was beneficial was in making style adjustments using Bootstrap.
+
+I was able to ask CoPilot to use Bootstrap styling to ensure modals had a consistent feel with the front-end.
+
+For example, when implementing modals to pop-up when users edit or delete posts, I asked Copilot to match the styling with the templates used on the login and signup templates, meaning I could make swift and consistent changes to bring all forms, templates and modals into visual consistency.
+
+### Create unit tests for Django
+
+I used Copilot to create several tests to ensure the app was working correctly.
+
+This was especially useful when debugging.
+
 ## Deploying the project locally
 
 ### Cloudinary
