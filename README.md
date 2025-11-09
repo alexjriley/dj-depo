@@ -26,7 +26,12 @@
   - [Unit tests](#unit-tests)
   - [Accessibility](#accessibility)  
   - [Responsive Screen Tests](#responsive-screen-tests)  
-- [Use of AI Tools](#use-of-ai-tools)  
+- [Use of AI Tools](#use-of-ai-tools)
+  - [Strategic use](#strategic-use)
+  - [Debugging](#debugging)
+  - [Optimising code](#optimising-code)
+  - [Unit test generation](#unit-test-generation)
+  - [Documentation](#documentation)   
 - [Getting Started](#getting-started)  
   - [Deploying the Project Locally](#deploying-the-project-locally)  
 - [Future Development](#future-development)
@@ -231,33 +236,29 @@ CSS Validation Service (W3C)
 
 ### Strategic use
 
-In this project, I used Microsoft Co-Pilot's AI agent integration in VS Code to provide support on areas such as:
+Throughout this project, I leveraged Microsoft Co-Pilot’s AI agent integration in VS Code to enhance productivity, support decision-making, and improve code quality. Key areas where AI contributed include:
 
-- Troubleshooting errors (500, 400) and suggesting solutions
-- Assisting in customising Django model and JavaScript waveform
-- Reviewing the project for accessibility and code quality
+- Error troubleshooting: Diagnosing HTTP errors (e.g., 400, 500) and suggesting actionable solutions.
+- Feature customisation: Assisting with Django model adjustments and JavaScript waveform integration.
+- Code review: Providing feedback on accessibility, maintainability, and overall code quality.
 
 ### Debugging
 
-On more than one occasion, I used AI to support debugging issues. This avoided using up time on blockers and I used each opportunity to learn from the assistant so that I could approach the problem myself in the future.
+AI played a pivotal role in debugging, helping me overcome blockers efficiently while also providing learning opportunities. For example, when customising the Wavesurfer.js plugin—a critical component of the front-end UX—the default progress bar obstructed the waveform. Using Co-Pilot, I was able to understand the underlying issue and implement a workaround (applying a drop-shadow instead of a solid shape).
 
-One example of this was customisation of the Wavesurfer.js plugin. This was a crucial component of the front-end UX for the application, however the out of the box version didn't match the clean front-end UX of the site.
-
-I used the Copilot agent to understand why the progress bar was obstructing the waveform. Although the solution (using a drop-shadow as opposed to a solid shape) was short of perfect, this was an example where AI assistance enabled the project to be elevated beyond my JavaScript abilities.
+Although the solution was not perfect, AI enabled me to extend the project’s functionality beyond my immediate JavaScript expertise, accelerating development while reinforcing my problem-solving skills.
 
 ### Optimising code
 
-Another area where AI was beneficial was in making style adjustments using Bootstrap.
+Co-Pilot was also instrumental in ensuring visual and functional consistency. For instance, I used AI to apply Bootstrap styling across modals so that interactions like editing or deleting posts matched the design of login and signup templates. This allowed me to make rapid, coherent updates that maintained a polished front-end UX.
 
-I was able to ask CoPilot to use Bootstrap styling to ensure modals had a consistent feel with the front-end.
+### Unit Test Generation
 
-For example, when implementing modals to pop-up when users edit or delete posts, I asked Copilot to match the styling with the templates used on the login and signup templates, meaning I could make swift and consistent changes to bring all forms, templates and modals into visual consistency.
+Finally, AI assisted in creating Django unit tests, which proved invaluable for debugging and verifying application functionality. Co-Pilot helped automate repetitive testing tasks, allowing me to focus on higher-level logic and ensuring the app worked reliably.
 
-### Create unit tests for Django
+### Documentation
 
-I used Copilot to create several tests to ensure the app was working correctly.
-
-This was especially useful when debugging.
+AI assistance was essential in maximising time for development by producing documentation including structuring and improving readme., generating concise inline code descriptions, responding to project ideas and assisting with planning and providing user stories ready to implement into the project board.
 
 ## Getting started
 
