@@ -23,6 +23,7 @@
   - [Database Development](#database-development)  
   - [Custom Model](#custom-model)  
 - [Testing](#testing)  
+  - [Unit tests](#unit-tests)
   - [Accessibility](#accessibility)  
   - [Responsive Screen Tests](#responsive-screen-tests)  
 - [Use of AI Tools](#use-of-ai-tools)  
@@ -152,6 +153,23 @@ Despite the move, the database table name remains `hello_world_audiopost` to mai
 This change does not affect the functionality of the application, as Django seamlessly handles the mapping between the model and the database table.
 
 ## Testing
+
+### Unit tests
+
+The mixes app includes a comprehensive suite of unit tests to ensure the functionality and reliability of its models, views, and workflows. These tests cover:
+
+- Model Tests: Validation of the AudioPost model, including its creation and string representation.
+- View Tests: Verification of view accessibility, login requirements, and CRUD operations for audio posts.
+- Integration Tests: End-to-end testing of workflows, such as creating, editing, and deleting audio posts.
+- Error Handling Tests: Validation of 404 errors and form submission error handling.
+
+Test Results
+
+All tests were executed successfully on 9 November 2025, with the following results:
+
+Total Tests: 12
+Passed: 12
+Failed: 0
 
 ### Accessibility
 
