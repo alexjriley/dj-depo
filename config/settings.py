@@ -91,7 +91,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com']
 
@@ -207,7 +207,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Use WhiteNoise's storage backend for serving compressed static files in production.
 # Remember to run `python3 manage.py collectstatic` on deploy so files are copied to STATIC_ROOT.
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Media files (user uploads)
 MEDIA_URL = '/media/'
