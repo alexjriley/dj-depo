@@ -2,11 +2,12 @@
 
 <p align="center">
   <a href="https://dj-depo-a90b7064471a.herokuapp.com/" target="_blank">
-  <img width="800" alt="Github project board" src="https://github.com/user-attachments/assets/a412426f-e1c7-466f-b4de-b4de8c256b01"/>
+  <img width="1536" height="1024" alt="dj-depo-banner" src="https://github.com/user-attachments/assets/8fd353f3-c920-421c-af04-f851716d46c4" />
     </a>
 </p>
 
-A full-stack Django web app for DJs to share and discover new mixes.
+<p align="center"><em>A full-stack Django web app for DJs to share and discover new mixes.
+</em></p>
 
 ## Contents
 
