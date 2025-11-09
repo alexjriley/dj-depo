@@ -180,11 +180,11 @@ CSS Validation Service (W3C)
 
 ### Responsive Screen Tests
 
-| Device  | Mockup |
-| ------------- | ------------- |
-| Small device (iPhone SE) | ![iphone-se-resp-test](https://github.com/user-attachments/assets/d39a26ab-1015-4b72-9fea-3c3a88d135bc) | 
-| Medium device (iPad Pro 11) | ![ipad-pro-11](https://github.com/user-attachments/assets/d59f14f9-6cb1-42a2-a58d-c285d3d8f8e7)|
-| Large device (Macbook Pro 13) | ![lg-device-macbookair13](https://github.com/user-attachments/assets/ea9b45ba-6db2-4f8e-83cc-98850db395d7) |
+| Device  | Mockup | Notes
+| ------------- | ------------- | ------------- |
+| Small device (iPhone SE) | <p align="center"><img src="https://github.com/user-attachments/assets/d39a26ab-1015-4b72-9fea-3c3a88d135bc" width="300" alt="iPhone SE layout test" /></p> | Menu collapses to hamburger; audio player fits screen width; homepage layout remains usable. |
+| Medium device (iPad Pro 11) | <p align="center"><img src="https://github.com/user-attachments/assets/57680b1c-f70f-43f2-b037-bdc94347fdf3" width="350" alt="iPad Pro 11 layout test" /></p> | Audio player scales correctly, mixes display in grid view |
+| Large device (Macbook Pro 13) | <p align="center"><img src="https://github.com/user-attachments/assets/ea9b45ba-6db2-4f8e-83cc-98850db395d7" width="400" alt="MacBook Pro 13 layout test" /></p> | Full desktop layout with 3 mixes per row |
 
 
 ## Use of AI tools
