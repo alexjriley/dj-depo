@@ -8,8 +8,9 @@ from .models import AudioPost
 
 class AudioPostModelTest(TestCase):
     """
-    This class contains unit tests to verify the functionality of the `AudioPost` model.
+    Test suite for the `AudioPost` model.
     """
+
     def test_create_audio_post(self):
         """
         Test the creation of an `AudioPost` instance.
@@ -20,6 +21,17 @@ class AudioPostModelTest(TestCase):
         post = AudioPost.objects.create(user=user, title='Test Audio', audio_file=SimpleUploadedFile('test.mp3', b'12345'))
         self.assertEqual(post.title, 'Test Audio')
         self.assertEqual(post.user.username, 'testuser')
+
+    def test_audio_post_str(self):
+        """
+        Test the string representation of the `AudioPost` model.
+
+        This test ensures that the `__str__` method of the `AudioPost` model returns
+        the expected string.
+        """
+        user = User.objects.create_user(username='testuser', password='testpass')
+        post = AudioPost.objects.create(user=user, title='Test Audio')
+        self.assertEqual(str(post), "Test Audio by testuser")
 
 class HomePageViewTest(TestCase):
     """
@@ -190,3 +202,84 @@ class DeleteAudioPostViewTest(TestCase):
         response = self.client.post(reverse('post-delete', args=[self.audio_post.id]))
         self.assertEqual(response.status_code, 302)  # Redirect to home
         self.assertFalse(AudioPost.objects.filter(id=self.audio_post.id).exists())
+
+class IntegrationTests(TestCase):
+    """
+    Integration tests for workflows involving multiple components.
+    """
+
+    def setUp(self):
+        """
+        Set up the test environment.
+
+        This method creates a test user and initializes the test client for use
+        in the integration tests.
+        """
+        self.user = User.objects.create_user(username='testuser', password='testpass')
+        self.client = Client()
+        self.client.login(username='testuser', password='testpass')
+
+    def test_full_audio_post_workflow(self):
+        """
+        Test creating, editing, and deleting an audio post.
+
+        This test verifies the entire workflow of creating an audio post, editing its
+        details, and deleting it, ensuring that all steps function correctly together.
+        """
+        # Create an audio post
+        audio = SimpleUploadedFile('test.mp3', b'12345')
+        response = self.client.post(reverse('upload_audio'), {'title': 'Test', 'audio_file': audio})
+        self.assertEqual(response.status_code, 302)
+        post = AudioPost.objects.get(title='Test')
+
+        # Edit the audio post
+        response = self.client.post(reverse('edit_audio_post', args=[post.id]), {
+            'title': 'Updated Title',
+            'description': 'Updated Description',
+            'audio_file': post.audio_file
+        })
+        self.assertEqual(response.status_code, 302)
+        post.refresh_from_db()
+        self.assertEqual(post.title, 'Updated Title')
+
+        # Delete the audio post
+        response = self.client.post(reverse('post-delete', args=[post.id]))
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(AudioPost.objects.filter(id=post.id).exists())
+
+class ErrorHandlingTests(TestCase):
+    """
+    Tests for error handling in the application.
+    """
+
+    def setUp(self):
+        """
+        Set up the test environment.
+
+        This method creates a test user and initializes the test client for use
+        in the error handling tests.
+        """
+        self.user = User.objects.create_user(username='testuser', password='testpass')
+        self.client = Client()
+        self.client.login(username='testuser', password='testpass')
+
+    def test_404_error(self):
+        """
+        Test that a 404 error is returned for a nonexistent URL.
+
+        This test ensures that requesting a URL that does not exist in the application
+        returns a 404 HTTP status code.
+        """
+        response = self.client.get('/nonexistent-url/')
+        self.assertEqual(response.status_code, 404)
+
+    def test_invalid_form_submission(self):
+        """
+        Test that invalid form submissions are handled gracefully.
+
+        This test verifies that submitting a form with invalid data (e.g., empty required fields)
+        does not crash the application and returns the user to the form with error messages.
+        """
+        response = self.client.post(reverse('upload_audio'), {'title': '', 'audio_file': ''})
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(response, 'form', 'audio_file', 'This field is required.')
