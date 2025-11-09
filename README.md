@@ -95,6 +95,8 @@ Lighthouse reports (Google Dev Tools)
 
 Scores
 
+
+
 Markup Validation Service HTML (W3C)
 
 | HTML  | Validator pass/fail |
@@ -113,6 +115,13 @@ CSS Validation Service (W3C)
 | CSS  | Validator pass/fail |
 | ------------- | ------------- |
 | `static>style.css`  | PASS  |
+
+
+Pep8 (Python Linter)
+
+### Responsive Screen Tests
+
+
 
 ## Deploying the project locally
 
