@@ -82,10 +82,11 @@ Enables users to:
 
 The AudioPost model in /mix/models.py explicitly sets the database table name to hello_world_audiopost. 
 
-This is because hello_world app was the original location of the model, and it was later moved to mixes. Despite the move, the database table name remains `hello_world_audiopost` to maintain compatibility with existing data.
+This is because hello_world app was the original location of the model, and it was later moved to mixes. 
 
-See documentation in mixes/models.py for further clarification.
+Despite the move, the database table name remains `hello_world_audiopost` to maintain compatibility with existing data.
 
+This change does not affect the functionality of the application, as Django seamlessly handles the mapping between the model and the database table.
 
 ## Testing
 
@@ -119,7 +120,13 @@ CSS Validation Service (W3C)
 | `static>style.css`  | PASS  |
 
 
-Pep8 (Python Linter)
+### Pep8 (Pylint extension VS Code)
+
+| File  | Validator pass/fail |
+| ------------- | ------------- |
+| `mixes>admin.py`  | PASS  |
+| `mixes>apps.py`  | PASS  |
+| `mixes>forms.py`  | PASS  |
 
 ### Responsive Screen Tests
 
