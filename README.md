@@ -247,4 +247,6 @@ This skip is conservative: it must be explicitly enabled and is intended for CI 
 
 ### Upcoming goals 
 
-In the future
+Looking ahead, I plan to introduce more social-based functionality including comments, ratings, and shared playlists along with the genre tags and search function that I ran out of time to implement in this project.
+
+Furthermore, I would improve the branding from its basic, minimal theme to something more energetic and unique. Moving away from the Bootstrap heavy layout and implementing a different, more kinetic framework such as React.
