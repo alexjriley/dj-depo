@@ -1,16 +1,11 @@
 from django import forms
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import AudioPost
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
-from .models import AudioPost
-
-# Create your views here.
 
 def signup(request):
     """
@@ -38,9 +33,7 @@ class AudioPostForm(forms.ModelForm):
             if not audio_file.name.endswith('.mp3'):
                 raise forms.ValidationError('Only MP3 files are allowed.')
         return audio_file
-    """
-    Form for creating and updating AudioPost instances.
-    """
+
 @login_required
 def upload_audio(request):
     """
@@ -67,7 +60,7 @@ def upload_audio(request):
 
 # Home page view for Mixes app
 def home_page_view(request):
-    posts = AudioPost.objects.order_by('-created_at')
+    posts = AudioPost.objects.order_by('-created_at')  # pylint: disable=no-member
     return render(request, 'mixes/home.html', {'posts': posts})
 
 @login_required

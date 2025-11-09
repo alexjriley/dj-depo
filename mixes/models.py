@@ -3,17 +3,8 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 import sys
 
-"""
-This module contains the `AudioPost` model, which was originally defined in the `hello_world` app.
-
-The model was moved to the `mixes` app to better align with the application's structure and functionality.
-
-Despite the move, the database table name remains `hello_world_audiopost` to maintain compatibility with existing data.
-
-This change does not affect the functionality of the application, as Django seamlessly handles the mapping between the model and the database table.
-"""
-
 class AudioPost(models.Model):
+    """Django model that represents an audio post in the application"""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -26,8 +17,10 @@ class AudioPost(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.title} by {self.user.username}"
+        username = getattr(self.user, 'username', str(self.user))
+        return f"{self.title} by {username}"
 
     class Meta:
+        """Ensures that the database table name remains consistent (hello_world_audiopost)"""
         db_table = 'hello_world_audiopost'
         app_label = 'mixes'
