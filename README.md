@@ -46,7 +46,9 @@
   - [Unit test generation](#unit-test-generation)
   - [Documentation](#documentation)   
 - [Getting Started](#getting-started)  
-  - [Deploying the Project Locally](#deploying-the-project-locally)  
+  - [Deploying the Project Locally](#deploying-the-project-locally)
+  - [Security](#security)
+  - [Cloudinary](#cloudinary)
 - [Future Development](#future-development)
 
 ## Tech stack
@@ -404,14 +406,30 @@ Finally, AI assisted in creating Django unit tests, which proved invaluable for 
 
 AI assistance was essential in maximising time for development by producing documentation including structuring and improving readme., generating concise inline code descriptions, responding to project ideas and assisting with planning and providing user stories ready to implement into the project board.
 
+### Workflow
+
+Overall, AI augmentation strongly benefitted my workflow as a junior developer working on a first full-stack project.
+
+Automating testing and debugging when errors were thrown has helped to elevate the potential of this project in line with my concept and vision.
+
 ## Getting started
+
+### Deploying the project locally
+
+You can clone the repository via the DJ Depo github and using terminal in your IDE.
 
 `git clone <repo>
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver`
 
-### Deploying the project locally
+Before deploying to a hosting environment such as Heroku, remember to set DEBUG to False.
+
+### Security
+
+Never commit passwords or sensitive information to the repository!
+
+Use environment variables and .gitignore for managing secret keys and configurations.
 
 ### Cloudinary
 
@@ -435,3 +453,14 @@ This skip is conservative: it must be explicitly enabled and is intended for CI 
 Looking ahead, I plan to introduce more social-based functionality including comments, ratings, and shared playlists along with the genre tags and search function that I ran out of time to implement in this project.
 
 Furthermore, I would improve the branding from its basic, minimal theme to something more energetic and unique. Moving away from the Bootstrap heavy layout and implementing a different, more kinetic framework such as React.
+
+## Acknowledgement & thanks
+
+### Wavesurfer
+- For use of an excellent open-source plugin
+
+### Code Institute
+- To Mark, Lewis, Jade and the team for their ongoing support.
+
+### Photographers
+- To Aleksandr Neplokhov, Gigxels, Odin Reyna and Kei Scampa for their images.
