@@ -23,16 +23,20 @@ if os.path.isfile('env.py'):
     import env
 
 if os.environ.get('CLOUDINARY_URL'):
-    # Parse CLOUDINARY_URL of the form cloudinary://<api_key>:<api_secret>@<cloud_name>
+    # Parse CLOUDINARY_URL cloudinary://<api_key>:<api_secret>@<cloud_name>
     _c_url = os.environ.get('CLOUDINARY_URL')
     try:
         _parts = _c_url.split('://', 1)[1]
         creds, cloud = _parts.split('@', 1)
         api_key, api_secret = creds.split(':', 1)
         cloud_name = cloud
-        cloudinary.config(cloud_name=cloud_name, api_key=api_key, api_secret=api_secret, secure=True)
+        cloudinary.config(
+            cloud_name=cloud_name,
+            api_key=api_key,
+            api_secret=api_secret,
+            secure=True)
     except Exception:
-        # Fallback to default behavior; cloudinary will raise a clearer error later
+        # Fallback to default behavior
         cloudinary.config(secure=True)
 else:
     cloudinary.config(
@@ -65,17 +69,19 @@ if not (_skip_for_tests or _skip_env or _skip_for_commands):
         )
     ):
         raise RuntimeError(
-            "Cloudinary credentials are missing. Set either CLOUDINARY_URL or the three vars: "
-            "CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET. "
-            "To bypass this check in CI for allowed commands set SKIP_CLOUDINARY_CHECK=1. "
-            "On Heroku run: heroku config:set CLOUDINARY_URL='cloudinary://<key>:<secret>@<name>' -a <appname>"
+            "Cloudinary creds missing. Set CLOUDINARY_URL or three vars: "
+            "CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET."
+            "To bypass for allowed commands set SKIP_CLOUDINARY_CHECK=1. "
+            "On Heroku run:"
+            "heroku config:set"
+            "CLOUDINARY_URL='cloudinary://<key>:<secret>@<name>' -a <appname>"
         )
 else:
     # Make skipping visible in logs/console so deploys show the decision.
     import warnings
 
     warnings.warn(
-        "Cloudinary credential check skipped (test run, SKIP_CLOUDINARY_CHECK, or allowed command)."
+        "Cloudinary credential check skipped"
     )
 
 
@@ -129,7 +135,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -169,18 +175,14 @@ CSRF_TRUSTED_ORIGINS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.'
+             'UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.'
+             'MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.'
+             'CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.'
+             'NumericPasswordValidator'},
 ]
 
 
@@ -196,8 +198,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 # Use a leading slash for STATIC_URL so generated static paths are absolute.
@@ -205,8 +205,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Use WhiteNoise's storage backend for serving compressed static files in production.
-# Remember to run `python3 manage.py collectstatic` on deploy so files are copied to STATIC_ROOT.
+# Use WhiteNoise storage for serving compressed static files in production.
+# Remember to run `python3 manage.py collectstatic` on deploy
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Media files (user uploads)
@@ -229,6 +229,6 @@ if 'test' in sys.argv:
         'DEPENDENCIES': [],
         'CREATE_DB': True,
     }
-    # During tests, use local file storage to avoid uploading test files to Cloudinary
+    # During tests, use local storage to avoid test files going to Cloudinary
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     MEDIA_ROOT = BASE_DIR / 'test_media'
