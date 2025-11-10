@@ -24,7 +24,12 @@
   - [Custom Model](#custom-model)  
 - [Testing](#testing)  
   - [Unit tests](#unit-tests)
-  - [Accessibility](#accessibility)  
+  - [Accessibility](#accessibility)
+  - [Validation](#validation)
+    - [HTML](#html)
+    - [CSS](#css)
+    - [JavaScript](#javascript)
+    - [Python](#python)  
   - [Responsive Screen Tests](#responsive-screen-tests)  
 - [Use of AI Tools](#use-of-ai-tools)
   - [Strategic use](#strategic-use)
@@ -191,6 +196,10 @@ Lighthouse report score (Google Dev Tools)
 
 <p align="center"><em>Lighthouse score</em></p>
 
+### Validation
+
+#### HTML 
+
 Markup Validation Service HTML (W3C)
 
 | HTML  | Validator pass/fail |
@@ -204,24 +213,29 @@ Markup Validation Service HTML (W3C)
 | `mixes>templates>mixes>signup.html>post_confirm_delete.html` | PASS  |
 | `mixes>templates>mixes>signup.html>upload_audio.html` | PASS  |
 
+#### CSS
+
 CSS Validation Service (W3C)
 
 | CSS  | Validator pass/fail |
 | ------------- | ------------- |
 | `static>style.css`  | PASS  |
 
+#### JavaScript
 
-### Pep8 (Pylint extension VS Code)
+#### Python
 
-| File  | Validator pass/fail |
-| ------------- | ------------- |
-| `mixes>admin.py`  | PASS  |
-| `mixes>apps.py`  | PASS  |
-| `mixes>forms.py`  | PASS  |
-| `mixes>models.py`  | PASS  |
-| `mixes>tests.py`  | PASS  |
-| `mixes>urls.py`  | PASS  |
-| `mixes>views.py`  | PASS  |
+CI Python Linter (Pep8)
+
+| File  | Validator pass/fail | Screenshot
+| ------------- | ------------- | ------------- |
+| `mixes>admin.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/8a041bf5-cbfb-4b31-81a5-67f7df3c5268" width="300" alt="Lint test result for admin.py" /></p> |
+| `mixes>apps.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/b6105da4-a4e0-4326-839b-73ce77724d8a" width="300" alt="Lint test result for apps.py" /></p> |
+| `mixes>forms.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/5cfeb6ba-afac-40a5-a9c3-e05062855fa7" width="300" alt="Lint test result for forms.py" /></p> |
+| `mixes>models.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/ac765ee7-dc4c-4fd9-8f09-8381a60013fe" width="300" alt="Lint test result for models.py" /></p> |
+| `mixes>tests.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/e4436b81-ff75-4fb8-8887-e323f2b9ae52" width="300" alt="Lint test result for tests.py" /></p> |
+| `mixes>urls.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/6e87edd5-62f8-45d7-aa5a-cd83c4b353c2" width="300" alt="Lint test result for mixes.py" /></p> |
+| `mixes>views.py`  | PASS  | <p align="center"><img src="" width="300" alt="Lint test result for views.py" /></p> |
 
 ### Responsive Screen Tests
 
@@ -233,6 +247,8 @@ CSS Validation Service (W3C)
 
 
 ## Use of AI tools
+
+
 
 ### Strategic use
 
