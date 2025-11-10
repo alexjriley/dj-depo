@@ -12,7 +12,8 @@
 ## Contents
 
 - [Tech Stack](#tech-stack)  
-- [Project Overview](#project-overview)  
+- [Project Overview](#project-overview)
+- [User Guide](#user-guide)  
 - [Planning](#planning)  
   - [User Stories](#user-stories)  
   - [Project Board](#project-board)  
@@ -63,6 +64,56 @@ DJ Depo is a full-stack web application built for DJs and mix enthusiasts to dis
 - Success criteria for the application were to build a simplified, responsive and easy-to-use interface for users to seamlessly upload and share their music onto the site.
 
 - Where similar websites have a focus on the user, DJ Depo is focused on building the community of users and a shared ethos to create a platform with an ever-expanding collection of DJ mixes for users to access and enjoy.
+
+## User Guide
+
+### Sign up
+
+To register for an account, click signup and enter a username and password.
+
+<p align="start">
+  <img width="400" alt="App signup" src="https://github.com/user-attachments/assets/dea2f173-2862-49ed-963f-32babfcc9984"/>
+</p>
+
+### Login
+
+If you are not logged in automatically, navigate to the login page and enter the details you used to signup.
+
+<p align="start">
+  <img width="400" alt="App Login page" src="https://github.com/user-attachments/assets/0fa6d10c-0c31-4150-baf9-72ef5884fe4c"/>
+</p>
+
+### Upload
+
+Once your account is created, you can login and share uploads to the homepage. Click upload a mix to navigate to the upload page.
+
+<p align="start">
+  <img width="400" alt="Mix upload page" src="https://github.com/user-attachments/assets/0523783f-3876-4e1a-9533-1ebd691f0587"/>
+</p>
+
+Add a title, description and audio file then click upload. If successful, you should be redirected to the homepage and see this message.
+
+<p align="start">
+  <img width="400" alt="Success message" src="https://github.com/user-attachments/assets/076c873f-aa87-4b0b-bf09-b378ce179a29"/>
+</p>
+
+#### Important note on uploading files
+
+DJ Depo is still in production and currently it cannot support large files. 
+
+If you are testing the site, please find a demo MP3 track to upload <a href="https://drive.google.com/drive/folders/198uLGmtQAayjhMTstJl2PxTFeRQPT6cj?usp=drive_link" target="_blank"> here </a>.
+
+### Edit or delete
+
+Made a mistake? No problem, you can choose to edit or delete your upload from the homepage.
+
+<p align="start">
+  <img width="400" alt="Edit or delete" src="https://github.com/user-attachments/assets/13916e88-59ae-48ac-a7ab-eaafce0da4cf"/>
+</p>
+
+<p align="start">
+  <img width="400" alt="Edit upload" src="https://github.com/user-attachments/assets/2d8aa3ca-4fd7-43bc-a5ee-5b68e8bcb504"/>
+</p>
 
 ## Planning
 
