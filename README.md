@@ -86,7 +86,7 @@ To register for an account, click signup and enter a username and password.
 
 ### Login
 
-If you are not logged in automatically, navigate to the login page and enter the details you used to signup.
+If you are not logged in automatically, navigate to the login page and enter the details you used to sign up.
 
 <p align="start">
   <img width="400" alt="App Login page" src="https://github.com/user-attachments/assets/0fa6d10c-0c31-4150-baf9-72ef5884fe4c"/>
@@ -184,7 +184,7 @@ For this project, I used Figma to create a wireframe and interactive front-end m
 
 <p align="center"><em>Wireframe</em></p>
 
-As there was not enough development time to implement genre tags, I modified the design byt simplifying the discovery page with the latest mixes appearing.
+As there was not enough development time to implement genre tags, I modified the design by simplifying the discovery page with the latest mixes appearing.
 
 <p align="center">
   <a href="https://www.figma.com/proto/6l3lN5EkOBqiOt3E1EZqwY/dj.depo?node-id=1-3908&scaling=min-zoom&content-scaling=fixed&t=R6DRqAfJW9GuPCEj-1" target="_blank">
