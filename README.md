@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://dj-depo-a90b7064471a.herokuapp.com/" target="_blank">
-  <img width="1536" height="1024" alt="dj-depo-banner" src="https://github.com/user-attachments/assets/8fd353f3-c920-421c-af04-f851716d46c4" />
+  <img width="800" height="1024" alt="dj-depo-banner" src="https://github.com/user-attachments/assets/8fd353f3-c920-421c-af04-f851716d46c4" />
     </a>
 </p>
 
@@ -71,7 +71,7 @@ DJ Depo is a full-stack web application built for DJs and mix enthusiasts to dis
 
 To register for an account, click signup and enter a username and password.
 
-<p align="start">
+<p align="center">
   <img width="400" alt="App signup" src="https://github.com/user-attachments/assets/dea2f173-2862-49ed-963f-32babfcc9984"/>
 </p>
 
@@ -79,7 +79,7 @@ To register for an account, click signup and enter a username and password.
 
 If you are not logged in automatically, navigate to the login page and enter the details you used to signup.
 
-<p align="start">
+<p align="center">
   <img width="400" alt="App Login page" src="https://github.com/user-attachments/assets/0fa6d10c-0c31-4150-baf9-72ef5884fe4c"/>
 </p>
 
@@ -87,13 +87,13 @@ If you are not logged in automatically, navigate to the login page and enter the
 
 Once your account is created, you can login and share uploads to the homepage. Click upload a mix to navigate to the upload page.
 
-<p align="start">
+<p align="center">
   <img width="400" alt="Mix upload page" src="https://github.com/user-attachments/assets/0523783f-3876-4e1a-9533-1ebd691f0587"/>
 </p>
 
 Add a title, description and audio file then click upload. If successful, you should be redirected to the homepage and see this message.
 
-<p align="start">
+<p align="center">
   <img width="400" alt="Success message" src="https://github.com/user-attachments/assets/076c873f-aa87-4b0b-bf09-b378ce179a29"/>
 </p>
 
@@ -107,11 +107,11 @@ If you are testing the site, please find a demo MP3 track to upload <a href="htt
 
 Made a mistake? No problem, you can choose to edit or delete your upload from the homepage.
 
-<p align="start">
+<p align="center">
   <img width="400" alt="Edit or delete" src="https://github.com/user-attachments/assets/13916e88-59ae-48ac-a7ab-eaafce0da4cf"/>
 </p>
 
-<p align="start">
+<p align="center">
   <img width="400" alt="Edit upload" src="https://github.com/user-attachments/assets/2d8aa3ca-4fd7-43bc-a5ee-5b68e8bcb504"/>
 </p>
 
@@ -133,7 +133,7 @@ To speed up development time, I asked Chat GPT to generate a set of user stories
 
 <p align="center">
   <a href="https://github.com/users/alexjriley/projects/8" target="_blank">
-  <img width="800" alt="Github project board" src="https://github.com/user-attachments/assets/46842883-85a3-41a0-8d75-eafda01f9bf8"/>
+  <img width="600" alt="Github project board" src="https://github.com/user-attachments/assets/46842883-85a3-41a0-8d75-eafda01f9bf8"/>
     </a>
 </p>
 
@@ -152,7 +152,7 @@ The sprints ran for one week and focused on key areas of development
 - Week 3 sprint: Frontend design (CSS) and testing.
 
 <p align="center">
-  <img width="800" alt="Trello project board" src="https://github.com/user-attachments/assets/5c6d2bcd-7815-4757-a3f4-1e87f5a012d5" />
+  <img width="600" alt="Trello project board" src="https://github.com/user-attachments/assets/5c6d2bcd-7815-4757-a3f4-1e87f5a012d5" />
 </p>
 
 <p align="center"><em>Trello sprint board</em></p>
@@ -164,8 +164,15 @@ The sprints ran for one week and focused on key areas of development
 For this project, I used Figma to create a wireframe and interactive front-end mockup of the site.  In the design of my homepage, I have largely stuck to the original designs as well as making improvements to the overall style and layout.
 
 <p align="center">
+  <img width="600" alt="Wireframed" src="https://github.com/user-attachments/assets/5281e399-bea5-425a-8db2-c0c6b1ed2534"/>
+</p>
+
+<p align="center"><em>Wireframe</em></p>
+
+
+<p align="center">
   <a href="https://www.figma.com/proto/6l3lN5EkOBqiOt3E1EZqwY/dj.depo?node-id=1-3908&scaling=min-zoom&content-scaling=fixed&t=R6DRqAfJW9GuPCEj-1" target="_blank">
-  <img width="800" alt="Github project board" src="https://github.com/user-attachments/assets/817e1163-7780-40e2-8b45-9a19a785f6e7"/>
+  <img width="600" alt="Figma front-end mockup" src="https://github.com/user-attachments/assets/817e1163-7780-40e2-8b45-9a19a785f6e7"/>
     </a>
 </p>
 
@@ -176,7 +183,7 @@ For this project, I used Figma to create a wireframe and interactive front-end m
 ### Database Development
 
 <p align="center">
-  <img width="800" alt="Admin panel" src="https://github.com/user-attachments/assets/225200c3-9b66-4f9d-a827-ff279716279d"/>
+  <img width="600" alt="Admin panel" src="https://github.com/user-attachments/assets/225200c3-9b66-4f9d-a827-ff279716279d"/>
 </p>
 
 <p align="center"><em>Admin panel</em></p>
@@ -188,7 +195,7 @@ I then connected a PostgreSQL database to make the application functional and en
 ### Custom Model
 
 <p align="center">
-  <img width="800" alt="Code snippet for a custom model" src="https://github.com/user-attachments/assets/b0aae2f4-7793-4e59-90e0-f829426f2680"/>
+  <img width="600" alt="Code snippet for a custom model" src="https://github.com/user-attachments/assets/b0aae2f4-7793-4e59-90e0-f829426f2680"/>
 </p>
 
 <p align="center"><em>Custom mix model</em></p>
@@ -246,7 +253,7 @@ To run your own tests in development use the command:
 `python manage.py test mixes` depending on your device.
 
 <p align="center">
-  <img width="800" alt="Running tests in terminal" src="https://github.com/user-attachments/assets/39501034-43a7-4bd6-b6f2-9be90912f78a"/>
+  <img width="600" alt="Running tests in terminal" src="https://github.com/user-attachments/assets/39501034-43a7-4bd6-b6f2-9be90912f78a"/>
 </p>
 
 <p align="center"><em>Unit tests</em></p>
@@ -261,7 +268,7 @@ Lighthouse report score (Google Dev Tools)
 
 
 <p align="center">
-  <img width="800" alt="Lighthouse test score" src="https://github.com/user-attachments/assets/0b002b72-ddb3-42b0-b4d2-34f2bcd33ed1"/>
+  <img width="600" alt="Lighthouse test score" src="https://github.com/user-attachments/assets/0b002b72-ddb3-42b0-b4d2-34f2bcd33ed1"/>
 </p>
 
 <p align="center"><em>Lighthouse score</em></p>
