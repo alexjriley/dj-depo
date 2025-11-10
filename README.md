@@ -169,6 +169,7 @@ For this project, I used Figma to create a wireframe and interactive front-end m
 
 <p align="center"><em>Wireframe</em></p>
 
+As there was not enough development time to implement genre tags, I modified the design byt simplifying the discovery page with the latest mixes appearing.
 
 <p align="center">
   <a href="https://www.figma.com/proto/6l3lN5EkOBqiOt3E1EZqwY/dj.depo?node-id=1-3908&scaling=min-zoom&content-scaling=fixed&t=R6DRqAfJW9GuPCEj-1" target="_blank">
@@ -191,6 +192,14 @@ For this project, I used Figma to create a wireframe and interactive front-end m
 After creating a remote repository, I set up the Django environment ready to use the Model View Template Framework.
 
 I then connected a PostgreSQL database to make the application functional and enable the creation of an admin panel, users and begin to develop CRUD functionality.
+
+<p align="center">
+  <img width="600" alt="Site admin view" src="https://github.com/user-attachments/assets/05238666-de6b-4427-b04a-dc2ef617607e"/>
+</p>
+
+<p align="center"><em>Admin view</em></p>
+
+From the admin panel, staff users can create and edit users and manage posts made via the mixes app.
 
 ### Custom Model
 
