@@ -173,13 +173,32 @@ The mixes app includes a comprehensive suite of unit tests to ensure the functio
 - Integration Tests: End-to-end testing of workflows, such as creating, editing, and deleting audio posts.
 - Error Handling Tests: Validation of 404 errors and form submission error handling.
 
-Test Results
+All tests were executed successfully on 10 November 2025, with the following results:
 
-All tests were executed successfully on 9 November 2025, with the following results:
+| Test Suite | Result |
+| ------------- | ------------- |
+| AudioPostModelTest  | Ok  |
+| HomePageViewTest  | Ok  |
+| UploadAudioViewTest  |  Ok  |
+| EditPostViewTest  | Ok  |
+| DeleteAudioPostViewTest  | Ok  |
+| IntegrationTests  | Ok  |
+| ErrorHandlingTests  | Ok  |
 
 Total Tests: 12
 Passed: 12
 Failed: 0
+
+To run your own tests in development use the command:
+
+`python3 manage.py test mixes` or 
+`python manage.py test mixes` depending on your device.
+
+<p align="center">
+  <img width="800" alt="Running tests in terminal" src="https://github.com/user-attachments/assets/39501034-43a7-4bd6-b6f2-9be90912f78a"/>
+</p>
+
+<p align="center"><em>Unit tests</em></p>
 
 ### Accessibility
 
@@ -235,7 +254,7 @@ CI Python Linter (Pep8)
 | `mixes>models.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/ac765ee7-dc4c-4fd9-8f09-8381a60013fe" width="300" alt="Lint test result for models.py" /></p> |
 | `mixes>tests.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/e4436b81-ff75-4fb8-8887-e323f2b9ae52" width="300" alt="Lint test result for tests.py" /></p> |
 | `mixes>urls.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/6e87edd5-62f8-45d7-aa5a-cd83c4b353c2" width="300" alt="Lint test result for mixes.py" /></p> |
-| `mixes>views.py`  | PASS  | <p align="center"><img src="" width="300" alt="Lint test result for views.py" /></p> |
+| `mixes>views.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/137a0d87-73a8-4b97-a2df-0e1f144f7f29" width="300" alt="Lint test result for views.py" /></p> |
 
 ### Responsive Screen Tests
 
