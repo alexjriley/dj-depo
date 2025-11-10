@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 import sys
 
+
 class AudioPost(models.Model):
     """Django model that represents an audio post in the application"""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,6 +22,7 @@ class AudioPost(models.Model):
         return f"{self.title} by {username}"
 
     class Meta:
-        """Ensures that the database table name remains consistent (hello_world_audiopost)"""
+        """Ensures that the database table name remains consistent 
+        (hello_world_audiopost)"""
         db_table = 'hello_world_audiopost'
         app_label = 'mixes'

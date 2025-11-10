@@ -7,10 +7,12 @@ from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 
+
 def signup(request):
     """
     Handle user signup by displaying and processing the user registration form.
-    If the form is valid, create a new user, log them in, and redirect to 'home'.
+    If the form is valid, create a new user, log them in, and redirect to
+    'home'.
     """
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -22,6 +24,7 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+
 class AudioPostForm(forms.ModelForm):
     class Meta:
         model = AudioPost
@@ -30,17 +33,27 @@ class AudioPostForm(forms.ModelForm):
     def clean_audio_file(self):
         audio_file = self.cleaned_data.get('audio_file')
         if audio_file:
-            if not audio_file.name.endswith('.mp3'):
+            # Check if the file is a CloudinaryResource object
+            if hasattr(audio_file, 'public_id'):
+                # Skip validation for already uploaded files
+                return audio_file
+
+            # Validate the file extension using the original file name
+            if not audio_file._name.lower().endswith('.mp3'):
                 raise forms.ValidationError('Only MP3 files are allowed.')
         return audio_file
+
 
 @login_required
 def upload_audio(request):
     """
     Handle audio file uploads by authenticated users.
 
-    Displays a form for uploading audio files and processes the form submission.
-    On successful upload, associates the audio post with the current user and redirects to 'home'.
+    Displays a form for uploading audio files and processes the form
+    submission.
+
+    On successful upload, associates the audio post with the current user and
+    redirects to 'home'.
     """
     if request.method == 'POST':
         form = AudioPostForm(request.POST, request.FILES)
@@ -51,17 +64,22 @@ def upload_audio(request):
             messages.success(request, 'Your mix was uploaded successfully!')
             return redirect('home')
         else:
-            # Form was submitted but invalid — show an error and re-render with entered data
-            messages.error(request, 'There was a problem uploading your mix. Please check the form and try again.')
+            # Form was submitted but invalid — show an error and re-render
+            messages.error(request,
+                           'There was a problem. Please try again.')
     else:
         # GET request — display a blank form without error messages
         form = AudioPostForm()
     return render(request, 'mixes/upload_audio.html', {'form': form})
 
 # Home page view for Mixes app
+
+
 def home_page_view(request):
-    posts = AudioPost.objects.order_by('-created_at')  # pylint: disable=no-member
+    posts = getattr(AudioPost, 'objects').order_by('-created_at')
+    # pylint: disable=no-member
     return render(request, 'mixes/home.html', {'posts': posts})
+
 
 @login_required
 def delete_post(request, pk):
@@ -69,7 +87,8 @@ def delete_post(request, pk):
 
     # Only allow the user who created the post to delete it
     if post.user != request.user:
-        return HttpResponseForbidden("You are not allowed to delete this post.")
+        return HttpResponseForbidden(
+            "You are not allowed to delete this post.")
 
     if request.method == "POST":
         post.delete()
@@ -78,16 +97,20 @@ def delete_post(request, pk):
 
     return render(request, 'mixes/post_confirm_delete.html', {'post': post})
 
+
 @login_required
 def edit_audio_post(request, pk):
-    post = get_object_or_404(AudioPost, pk=pk, user=request.user)  # Ensure only the user's post is fetched
+    post = get_object_or_404(AudioPost, pk=pk, user=request.user)
+    # Ensure only the user's post is fetched
 
-    form = AudioPostForm(request.POST or None, request.FILES or None, instance=post)
+    form = AudioPostForm(
+        request.POST or None, request.FILES or None, instance=post)
 
     if request.method == 'POST' and form.is_valid():
         form.save()
         messages.success(request, 'Your mix was updated successfully!')
-        return redirect('home')  # Ensure redirect after successful form submission
+        return redirect('home')
+        # Ensure redirect after successful form submission
 
     # Debugging output
     print("Post object (ID):", post.id)
@@ -95,4 +118,5 @@ def edit_audio_post(request, pk):
     print("Post object (Description):", post.description)
     print("Form initial data:", form.initial)
 
-    return render(request, 'mixes/edit_audio_post.html', {'form': form, 'post': post})
+    return render(request, 'mixes/edit_audio_post.html', {
+     'form': form, 'post': post})
