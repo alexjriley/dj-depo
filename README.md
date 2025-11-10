@@ -13,7 +13,13 @@
 
 - [Tech Stack](#tech-stack)  
 - [Project Overview](#project-overview)
-- [User Guide](#user-guide)  
+- [User Guide](#user-guide)
+  - [Sign up](#sign-up)
+  - [Login](#login)
+  - [CRUD Functionality](#crud-functionality)
+    - [Upload](#upload-files)
+    - [Media Requirements](#media-requirements)
+    - [Edit or delete](#edit-or-delete)
 - [Planning](#planning)  
   - [User Stories](#user-stories)  
   - [Project Board](#project-board)  
@@ -22,7 +28,8 @@
   - [Concept and Wireframe](#concept-and-wireframe)  
 - [Development](#development)  
   - [Database Development](#database-development)  
-  - [Custom Model](#custom-model)  
+  - [Custom Model](#custom-model)
+  - [Wavesurfer.js](#wavesurfer)
 - [Testing](#testing)  
   - [Unit tests](#unit-tests)
   - [Accessibility](#accessibility)
@@ -71,7 +78,7 @@ DJ Depo is a full-stack web application built for DJs and mix enthusiasts to dis
 
 To register for an account, click signup and enter a username and password.
 
-<p align="center">
+<p align="start">
   <img width="400" alt="App signup" src="https://github.com/user-attachments/assets/dea2f173-2862-49ed-963f-32babfcc9984"/>
 </p>
 
@@ -79,39 +86,45 @@ To register for an account, click signup and enter a username and password.
 
 If you are not logged in automatically, navigate to the login page and enter the details you used to signup.
 
-<p align="center">
+<p align="start">
   <img width="400" alt="App Login page" src="https://github.com/user-attachments/assets/0fa6d10c-0c31-4150-baf9-72ef5884fe4c"/>
 </p>
 
-### Upload
+Only staff and superusers have admin access.
+
+Users can edit or delete their own posts only.
+
+### CRUD Functionality
+
+#### Upload files
 
 Once your account is created, you can login and share uploads to the homepage. Click upload a mix to navigate to the upload page.
 
-<p align="center">
+<p align="start">
   <img width="400" alt="Mix upload page" src="https://github.com/user-attachments/assets/0523783f-3876-4e1a-9533-1ebd691f0587"/>
 </p>
 
 Add a title, description and audio file then click upload. If successful, you should be redirected to the homepage and see this message.
 
-<p align="center">
+<p align="start">
   <img width="400" alt="Success message" src="https://github.com/user-attachments/assets/076c873f-aa87-4b0b-bf09-b378ce179a29"/>
 </p>
 
-#### Important note on uploading files
+#### Media requirements
 
 DJ Depo is still in production and currently it cannot support large files. 
 
 If you are testing the site, please find a demo MP3 track to upload <a href="https://drive.google.com/drive/folders/198uLGmtQAayjhMTstJl2PxTFeRQPT6cj?usp=drive_link" target="_blank"> here </a>.
 
-### Edit or delete
+#### Edit or delete
 
 Made a mistake? No problem, you can choose to edit or delete your upload from the homepage.
 
-<p align="center">
+<p align="start">
   <img width="400" alt="Edit or delete" src="https://github.com/user-attachments/assets/13916e88-59ae-48ac-a7ab-eaafce0da4cf"/>
 </p>
 
-<p align="center">
+<p align="start">
   <img width="400" alt="Edit upload" src="https://github.com/user-attachments/assets/2d8aa3ca-4fd7-43bc-a5ee-5b68e8bcb504"/>
 </p>
 
@@ -228,6 +241,22 @@ This is because the hello_world app was the original location of the model, and 
 Despite the move, the database table name remains `hello_world_audiopost` to maintain compatibility with existing data.
 
 This change does not affect the functionality of the application, as Django seamlessly handles the mapping between the model and the database table.
+
+### Wavesurfer
+
+<p align="center">
+  <a href="https://wavesurfer.xyz/" target="_blank">
+  <img width="200" alt="Wavesurfer logo" src="https://github.com/user-attachments/assets/175055cb-82e7-4f74-9580-289965cb0d69"/>
+    </a>
+</p>
+
+<p align="center"><em>Wavesurfer</em></p>
+
+I chose this plugin because it was open-source and met the basic requirement for my MVP.
+
+During development, I customised the visualiser so that it matched the style of the site. I also adapted the play/pause and progress bars for improved accessibility and site UX.
+
+I also integrated it into the Bootstrap cards used for uploads, so that it would appear along with user mixes in the feed.
 
 ## Testing
 
