@@ -300,6 +300,18 @@ CSS Validation Service (W3C)
 
 #### JavaScript
 
+jshint.com
+
+`mixes/static/mixes/js/wavesurfer-init.js`
+
+| Metric | Value | Notes |
+|--------|--------|-------|
+| Total functions | 14 | — |
+| Max function parameters | 2 | Median: 0.5 |
+| Max statements per function | 18 | Median: 10.5 |
+| Max cyclomatic complexity | 8 | Median: 4 |
+
+
 #### Python
 
 CI Python Linter (Pep8)
@@ -313,6 +325,7 @@ CI Python Linter (Pep8)
 | `mixes>tests.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/e4436b81-ff75-4fb8-8887-e323f2b9ae52" width="300" alt="Lint test result for tests.py" /></p> |
 | `mixes>urls.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/6e87edd5-62f8-45d7-aa5a-cd83c4b353c2" width="300" alt="Lint test result for mixes.py" /></p> |
 | `mixes>views.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/137a0d87-73a8-4b97-a2df-0e1f144f7f29" width="300" alt="Lint test result for views.py" /></p> |
+| `config>settings.py`  | PASS  | <p align="center"><img src="https://github.com/user-attachments/assets/2a8e7747-57dd-4f3b-83f9-8af5d6b7989e" width="300" alt="Lint test result for settings.py" /></p> |
 
 ### Responsive Screen Tests
 
